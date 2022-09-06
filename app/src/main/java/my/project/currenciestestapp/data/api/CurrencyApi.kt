@@ -4,4 +4,5 @@ import my.project.currenciestestapp.BuildConfig
 
 
 interface CurrencyApi {
+
 }
