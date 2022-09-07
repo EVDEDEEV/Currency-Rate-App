@@ -1,11 +1,18 @@
 package my.project.currenciestestapp.di
 
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import my.project.currenciestestapp.data.api.ApiConstants.BASE_URL
 import my.project.currenciestestapp.data.api.CurrencyApi
+import my.project.currenciestestapp.data.models.local.CurrencyDatabase
+import my.project.currenciestestapp.data.models.local.CurrencyItemDao
+import my.project.currenciestestapp.data.repository.CurrencyRepositoryImpl
+import my.project.currenciestestapp.data.repository.CurrencyRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -13,7 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+object AppModule {
 
     @Singleton
     @Provides
@@ -30,7 +37,27 @@ class AppModule {
             .build()
 
 
-//    @Provides
-//    @Singleton
-//    fun provideAdapter():
+    @Singleton
+    @Provides
+    fun provideCurrencyRepository(currencyItemDao: CurrencyItemDao, currencyApi: CurrencyApi) =
+        CurrencyRepositoryImpl(currencyItemDao, currencyApi) as CurrencyRepository
+
+
+    @Singleton
+    @Provides
+    fun provideCurrencyConverterDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context, CurrencyDatabase::class.java,
+        "currency_converter_db"
+    ).build()
+
+
+    @Singleton
+    @Provides
+    fun provideCurrencyDao(
+        currencyDatabase: CurrencyDatabase
+    ) = currencyDatabase.currencyDao()
+
+
 }
