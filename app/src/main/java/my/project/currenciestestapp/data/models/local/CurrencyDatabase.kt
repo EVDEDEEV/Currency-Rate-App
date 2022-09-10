@@ -9,6 +9,6 @@ import androidx.room.RoomDatabase
     version = 1)
 abstract class CurrencyDatabase : RoomDatabase() {
 
-    abstract fun currencyDao(): CurrencyItemDao
+    abstract fun currencyDao(): CurrencyDao
 
 }

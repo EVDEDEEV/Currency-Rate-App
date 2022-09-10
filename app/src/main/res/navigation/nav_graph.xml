@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/currencyListFragment"
-        android:name="my.project.currenciestestapp.presentation.CurrencyListFragment"
+        android:name="my.project.currenciestestapp.presentation.fragments.currencyFragment.CurrencyListFragment"
 
         tools:layout="@layout/fragment_currency_list"/>
 <!--        android:label="fragment_currency_list"-->

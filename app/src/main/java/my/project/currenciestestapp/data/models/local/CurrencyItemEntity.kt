@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class CurrencyItemEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
+    val sourceCurrency: String = "",
     val currency: String = "",
-    val currencyLabel: String = "",
-    val rate: Double = 0.0
+    val rate: Double,
 )
