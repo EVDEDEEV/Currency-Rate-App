@@ -2,7 +2,7 @@ package my.project.currenciestestapp.presentation.models
 
 data class RatesUiModel(
     val id: Int,
-    val currencyName: String,
+    var currencyName: String,
     val rates: Double
 )
 //data class RatesUiModel(

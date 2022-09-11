@@ -24,17 +24,16 @@ class CurrencyRepository @Inject constructor(
 //        val ss = dd
 //    }
 
-    suspend fun getCurrencies(): List<CurrenciesUiModel> {
-        val result = currenciesApi.getCurrencies().body()
-        val currencies = result?.symbols?.entries?.mapIndexed { index, entry ->
-            CurrenciesUiModel(
-                id = index.inc(),
-                symbols = entry.key,
-                abbr = entry.value)
-        }.orEmpty()
-        return currencies
-    }
-
+//    suspend fun getCurrencies(): List<CurrenciesUiModel> {
+//        val result = currenciesApi.getCurrencies().body()
+//        val currencies = result?.symbols?.entries?.mapIndexed() { id, entry ->
+//            CurrenciesUiModel(
+//                id = id.inc(),
+//                abbreviation = entry.key,
+//                fullName = entry.value)
+//        }.orEmpty()
+//        return currencies
+//    }
 
     suspend fun getRates(): List<RatesUiModel> {
         val result = ratesApi.getRates().body()

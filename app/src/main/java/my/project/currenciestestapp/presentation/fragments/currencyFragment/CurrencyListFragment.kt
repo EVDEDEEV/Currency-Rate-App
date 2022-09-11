@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import my.project.currenciestestapp.databinding.FragmentCurrencyListBinding
@@ -31,26 +32,26 @@ class CurrencyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        setDataToRecyclerView()
+        setDataToRecyclerView()
     }
 
-//    private fun setDataFromApiToLocalUiModel() {
-//        viewModel.getRates()
-//    }
     private fun setDataFromApiToLocalUiModel() {
-        viewModel.getPost()
+        viewModel.getRates()
     }
+//    private fun setDataFromApiToLocalUiModel() {
+//        viewModel.getPost()
+//    }
 //    private fun setDataFromApiToLocalUiModel2() {
 ////        viewModel.getCurrencies()
 //        val aa = viewModel.getCurrencies()
 //        val dd = aa
 //    }
 
-//    private fun setDataToRecyclerView() {
-//        viewModel.currencies.observe(viewLifecycleOwner) {
-//            currencyAdapter.submitList(it)
-//        }
-//    }
+    private fun setDataToRecyclerView() {
+        viewModel.currencies.observe(viewLifecycleOwner) {
+            currencyAdapter.submitList(it)
+        }
+    }
 //    private fun setDataToRecyclerView() {
 //        viewModel.currencies.observe(viewLifecycleOwner) {
 //            currencyAdapter.submitList(it)
@@ -60,8 +61,8 @@ class CurrencyListFragment : Fragment() {
     private fun initRecyclerView() {
         binding.rVcurrency.apply {
             adapter = currencyAdapter
-            layoutManager = LinearLayoutManager(
-                context)
+            layoutManager = GridLayoutManager(
+                context, 2, GridLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL))
         }
     }

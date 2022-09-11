@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         сразу и показывать из смапленной модельки.
         */
 
+
         navController = findNavController(R.id.navHostFragment)
         setupActionBarWithNavController(navController)
     }
