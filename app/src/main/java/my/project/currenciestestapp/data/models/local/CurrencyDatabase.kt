@@ -2,16 +2,15 @@ package my.project.currenciestestapp.data.models.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import my.project.currenciestestapp.data.models.local.currenies.CurrencyDao
-import my.project.currenciestestapp.data.models.local.currenies.CurrencyItemEntity
-import my.project.currenciestestapp.data.models.mainmodel.MainEntity
+import my.project.currenciestestapp.data.models.local.rates.RatesDao
+import my.project.currenciestestapp.data.models.local.rates.RatesItem
 
 
 @Database(
-    entities = [CurrencyItemEntity::class, MainEntity::class],
+    entities = [RatesItem::class],
     version = 1)
 abstract class CurrencyDatabase : RoomDatabase() {
 
-    abstract fun currencyDao(): CurrencyDao
+    abstract fun ratesDao(): RatesDao
 
 }

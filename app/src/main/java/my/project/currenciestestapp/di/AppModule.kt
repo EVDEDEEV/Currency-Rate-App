@@ -48,8 +48,8 @@ object AppModule {
 
 //    @Singleton
 //    @Provides
-//    fun provideCurrencyRepository(currencyDao: CurrencyDao, currencyApi: CurrencyApi) =
-//        CurrencyRepositoryImpl(currencyDao, currencyApi) as CurrencyRepository
+//    fun provideCurrencyRepository(ratesDao: CurrencyDao, currencyApi: CurrencyApi) =
+//        CurrencyRepositoryImpl(ratesDao, currencyApi) as CurrencyRepository
 
     @Singleton
     @Provides
@@ -65,5 +65,5 @@ object AppModule {
     @Provides
     fun provideCurrencyDao(
         currencyDatabase: CurrencyDatabase,
-    ) = currencyDatabase.currencyDao()
+    ) = currencyDatabase.ratesDao()
 }

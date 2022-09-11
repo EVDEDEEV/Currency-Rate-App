@@ -4,18 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_gray"
     tools:context=".presentation.fragments.currencyFragment.CurrencyListFragment">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rVcurrency"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/teal_200"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/currency_item"
+        android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@+id/helloField"/>
 
     <TextView

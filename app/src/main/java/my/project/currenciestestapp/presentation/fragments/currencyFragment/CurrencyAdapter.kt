@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import my.project.currenciestestapp.databinding.CurrencyItemBinding
-import my.project.currenciestestapp.extensions.getFlagResource
 import my.project.currenciestestapp.presentation.models.RatesUiModel
 
 //class CurrencyAdapter :
@@ -26,7 +25,7 @@ class CurrencyAdapter :
 
     }
 
-//    override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
+    //    override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
 //        holder.bind(listCurrency[position])
 //    }
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
@@ -41,8 +40,9 @@ class CurrencyAdapter :
         private val binding: CurrencyItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(ratesUi: RatesUiModel) {
+            val rateDoubleValue = ratesUi.rates
             binding.currencyName.text = ratesUi.currencyName
-            binding.currencyRate.text = ratesUi.rates.toString()
+            binding.currencyRate.text = String.format("%.2f", rateDoubleValue)
         }
     }
 

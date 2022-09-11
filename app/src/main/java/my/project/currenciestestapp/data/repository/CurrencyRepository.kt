@@ -13,7 +13,7 @@ import java.util.concurrent.Flow
 import javax.inject.Inject
 
 class CurrencyRepository @Inject constructor(
-//    private val currencyDao: CurrencyDao,
+//    private val ratesDao: CurrencyDao,
     private val ratesApi: RatesApi,
     private val currenciesApi: CurrenciesApi,
 ) {

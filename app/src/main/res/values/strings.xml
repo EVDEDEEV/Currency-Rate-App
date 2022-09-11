@@ -2,4 +2,6 @@
     <string name="app_name">СurrenciesTestApp</string>
     <string name="usd">USD</string>
     <string name="currencyRate">1.56</string>
+    <string name="favorites">Favorites</string>
+    <string name="home">home</string>
 </resources>

@@ -1,7 +1,5 @@
 package my.project.currenciestestapp.presentation.models
 
-import my.project.currenciestestapp.data.models.local.currenies.CurrencyItemEntity
-
 data class CurrencyUi(
     val id: Int?,
     val baseCurrency: String,
