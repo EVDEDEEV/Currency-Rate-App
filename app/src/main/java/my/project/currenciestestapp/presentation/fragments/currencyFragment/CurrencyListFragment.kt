@@ -6,19 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import my.project.currenciestestapp.databinding.FragmentCurrencyListBinding
-import my.project.currenciestestapp.presentation.SharedViewModel
-import my.project.currenciestestapp.presentation.models.RatesUiModel
 
 @AndroidEntryPoint
 class CurrencyListFragment : Fragment() {
 
-    private val viewModel: SharedViewModel by viewModels()
+    private val viewModel: CurrencyListViewModel by viewModels()
     private lateinit var binding: FragmentCurrencyListBinding
     private val currencyAdapter by lazy { CurrencyAdapter() }
 
@@ -29,7 +25,8 @@ class CurrencyListFragment : Fragment() {
     ): View {
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false)
 
-        viewModel.getCurrencies()
+        setDataFromApiToLocalUiModel()
+
         initRecyclerView()
 
         return binding.root
@@ -37,30 +34,21 @@ class CurrencyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        binding.rVcurrency.adapter = currencyAdapter
-//
-//        lifecycleScope.launch() {
-//            val aboba = viewModel.getCurrencies()
-//            val dd = aboba
-//        }
+        setDataToRecyclerView()
 
 
-//        getList()
-//        initRecyclerView()
-//        val baze = viewModel.get()
-//        val ss = baze
-//        binding.helloField.text = baze.toString()
     }
 
-//    private fun initRecyclerView() {
-//        binding.rVcurrency.apply {
-//            adapter = currencyAdapter
-//            layoutManager = LinearLayoutManager(
-//                context)
-//            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-//        }
-//    }
+    private fun setDataFromApiToLocalUiModel() {
+        viewModel.getCurrencies()
+    }
+
+    private fun setDataToRecyclerView() {
+        viewModel.currencies.observe(viewLifecycleOwner) {
+            currencyAdapter.submitList(it)
+        }
+    }
+
     private fun initRecyclerView() {
         binding.rVcurrency.apply {
             adapter = currencyAdapter
@@ -70,12 +58,12 @@ class CurrencyListFragment : Fragment() {
         }
     }
 
-    private fun getList() {
-        lifecycleScope.launch() {
-            val aboba = viewModel.getCurrencies()
-            val dd = aboba
-        }
-    }
+//    private fun getList() {
+//        lifecycleScope.launch() {
+//            val aboba = viewModel.getCurrencies()
+//            val dd = aboba
+//        }
+//    }
 //    private fun getList() {
 //        lifecycleScope.launch() {
 //            currencyAdapter.setCurrency()

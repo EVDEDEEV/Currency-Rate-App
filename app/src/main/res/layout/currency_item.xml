@@ -1,7 +1,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_marginStart="5dp"
     android:layout_marginTop="5dp"
@@ -26,14 +26,12 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars"
             />
-
-
         <TextView
             android:id="@+id/currencyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Currency"
+            android:text="@string/usd"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/currencyRate"
@@ -46,7 +44,7 @@
             android:padding="10dp"
             android:textColor="@color/teal_200"
             android:textAlignment="textStart"
-            android:text="32323232"
+            android:text="@string/currencyRate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

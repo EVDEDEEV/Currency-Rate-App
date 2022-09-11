@@ -5,7 +5,7 @@ import my.project.currenciestestapp.data.api.CurrencyApi
 import my.project.currenciestestapp.presentation.models.RatesUiModel
 import javax.inject.Inject
 
-class CurrencyRepositoryImpl @Inject constructor(
+class CurrencyRepository @Inject constructor(
 //    private val currencyDao: CurrencyDao,
     private val api: CurrencyApi,
 ) {

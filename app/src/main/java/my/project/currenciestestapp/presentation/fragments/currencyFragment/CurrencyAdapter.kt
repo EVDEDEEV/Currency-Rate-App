@@ -14,7 +14,7 @@ import my.project.currenciestestapp.presentation.models.RatesUiModel
 class CurrencyAdapter :
     ListAdapter<RatesUiModel, CurrencyAdapter.CurrencyViewHolder>(DIFF_CALLBACK) {
 
-    private var listCurrency = emptyList<RatesUiModel>()
+//    private var listCurrency = emptyList<RatesUiModel>()
 //    private var listCurrency = emptyList<FakeList>()
 
 
@@ -36,22 +36,17 @@ class CurrencyAdapter :
     }
 
     override fun getItemCount(): Int {
-        return listCurrency.size
-    }
-
-    fun setCurrency(currencyList: List<RatesUiModel>) {
-        listCurrency = currencyList
-        notifyDataSetChanged()
+        return currentList.size
     }
 
     inner class CurrencyViewHolder(
         private val binding: CurrencyItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(ratesUi: RatesUiModel) {
-            binding.currencyName.text = ratesUi.id.toString()
+            binding.currencyName.text = ratesUi.currencyName
+//            binding.currencyName.text = ratesUi.id.toString()
             binding.currencyRate.text = ratesUi.rates.toString()
         }
-
     }
 
     companion object {
@@ -63,6 +58,5 @@ class CurrencyAdapter :
             override fun areContentsTheSame(oldItem: RatesUiModel, newItem: RatesUiModel): Boolean =
                 oldItem == newItem
         }
-
     }
 }

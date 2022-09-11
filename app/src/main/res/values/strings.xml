@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">СurrenciesTestApp</string>
+    <string name="usd">USD</string>
+    <string name="currencyRate">1.56</string>
 </resources>

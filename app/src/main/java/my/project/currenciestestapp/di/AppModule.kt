@@ -8,9 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import my.project.currenciestestapp.data.api.CurrencyApi
-import my.project.currenciestestapp.data.models.local.CurrencyDao
 import my.project.currenciestestapp.data.models.local.CurrencyDatabase
-import my.project.currenciestestapp.data.repository.CurrencyRepositoryImpl
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
