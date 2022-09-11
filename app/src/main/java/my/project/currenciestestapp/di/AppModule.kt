@@ -7,12 +7,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import my.project.currenciestestapp.data.api.CurrencyApi
+import my.project.currenciestestapp.data.api.CurrenciesApi
+import my.project.currenciestestapp.data.api.RatesApi
 import my.project.currenciestestapp.data.models.local.CurrencyDatabase
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-
 
 private const val BASE_URL = "https://api.apilayer.com/exchangerates_data/"
 
@@ -22,8 +22,14 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApiInterface(retrofit: Retrofit): CurrencyApi {
-        return retrofit.create(CurrencyApi::class.java)
+    fun provideRatesApiInterface(retrofit: Retrofit): RatesApi {
+        return retrofit.create(RatesApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCurrenciesApiInterface(retrofit: Retrofit): CurrenciesApi {
+        return retrofit.create(CurrenciesApi::class.java)
     }
 
     @Provides
@@ -60,6 +66,4 @@ object AppModule {
     fun provideCurrencyDao(
         currencyDatabase: CurrencyDatabase,
     ) = currencyDatabase.currencyDao()
-
-
 }

@@ -1,4 +1,4 @@
-package my.project.currenciestestapp.data.models.local
+package my.project.currenciestestapp.data.models.local.currenies
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,5 +9,5 @@ data class CurrencyItemEntity(
     val id: Int? = null,
     val sourceCurrency: String = "",
     val currency: String = "",
-    val rate: Double,
+    val rates: Double,
 )

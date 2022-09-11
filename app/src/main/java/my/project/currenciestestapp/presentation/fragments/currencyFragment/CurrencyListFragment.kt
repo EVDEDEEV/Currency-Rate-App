@@ -18,57 +18,51 @@ class CurrencyListFragment : Fragment() {
     private lateinit var binding: FragmentCurrencyListBinding
     private val currencyAdapter by lazy { CurrencyAdapter() }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false)
-
+//        setDataFromApiToLocalUiModel2()
         setDataFromApiToLocalUiModel()
-
         initRecyclerView()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setDataToRecyclerView()
-
-
+//        setDataToRecyclerView()
     }
 
+//    private fun setDataFromApiToLocalUiModel() {
+//        viewModel.getRates()
+//    }
     private fun setDataFromApiToLocalUiModel() {
-        viewModel.getCurrencies()
+        viewModel.getPost()
     }
+//    private fun setDataFromApiToLocalUiModel2() {
+////        viewModel.getCurrencies()
+//        val aa = viewModel.getCurrencies()
+//        val dd = aa
+//    }
 
-    private fun setDataToRecyclerView() {
-        viewModel.currencies.observe(viewLifecycleOwner) {
-            currencyAdapter.submitList(it)
-        }
-    }
+//    private fun setDataToRecyclerView() {
+//        viewModel.currencies.observe(viewLifecycleOwner) {
+//            currencyAdapter.submitList(it)
+//        }
+//    }
+//    private fun setDataToRecyclerView() {
+//        viewModel.currencies.observe(viewLifecycleOwner) {
+//            currencyAdapter.submitList(it)
+//        }
+//    }
 
     private fun initRecyclerView() {
         binding.rVcurrency.apply {
             adapter = currencyAdapter
             layoutManager = LinearLayoutManager(
                 context)
-            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL))
         }
     }
-
-//    private fun getList() {
-//        lifecycleScope.launch() {
-//            val aboba = viewModel.getCurrencies()
-//            val dd = aboba
-//        }
-//    }
-//    private fun getList() {
-//        lifecycleScope.launch() {
-//            currencyAdapter.setCurrency()
-//        }
-//    }
-
-
 }

@@ -1,4 +1,4 @@
-package my.project.currenciestestapp.data.models.local
+package my.project.currenciestestapp.data.models.local.currenies
 
 import androidx.room.*
 
