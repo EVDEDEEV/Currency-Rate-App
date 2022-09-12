@@ -7,9 +7,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import my.project.currenciestestapp.data.api.ApiKeyInterceptor
 import my.project.currenciestestapp.data.api.CurrenciesApi
 import my.project.currenciestestapp.data.api.RatesApi
-import my.project.currenciestestapp.data.models.local.CurrencyDatabase
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -34,11 +35,24 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit =
-        Retrofit.Builder()
+    fun provideRetrofit(): Retrofit {
+        val client = OkHttpClient.Builder().addInterceptor(ApiKeyInterceptor()).build()
+        return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+//    @Provides
+//    @Singleton
+//    fun provideRetrofit(): Retrofit {
+//        val client = OkHttpClient.Builder().addInterceptor(ApiKeyInterceptor()).build()
+//        return Retrofit.Builder()
+//            .baseUrl(BASE_URL)
+//            .client(client)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//    }
 
 //    @Provides
 //    @Singleton
@@ -51,19 +65,4 @@ object AppModule {
 //    fun provideCurrencyRepository(ratesDao: CurrencyDao, currencyApi: CurrencyApi) =
 //        CurrencyRepositoryImpl(ratesDao, currencyApi) as CurrencyRepository
 
-    @Singleton
-    @Provides
-    fun provideCurrencyConverterDatabase(
-        @ApplicationContext context: Context,
-    ) = Room.databaseBuilder(
-        context, CurrencyDatabase::class.java,
-        "currency_converter_db"
-    ).build()
-
-
-    @Singleton
-    @Provides
-    fun provideCurrencyDao(
-        currencyDatabase: CurrencyDatabase,
-    ) = currencyDatabase.ratesDao()
 }

@@ -10,6 +10,7 @@ interface CurrenciesApi {
 
     @GET("symbols")
     suspend fun getCurrencies(
-        @Query("apikey") apiKey: String = Constants.API_KEY,
+//        @Query("apikey") apiKey: String = Constants.API_KEY,
+//        @Query("base") base: String,
     ): Response<CurrenciesResponse>
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import my.project.currenciestestapp.databinding.FragmentCurrencyListBinding
+import my.project.currenciestestapp.utils.Constants.API_KEY
 
 @AndroidEntryPoint
 class CurrencyListFragment : Fragment() {
