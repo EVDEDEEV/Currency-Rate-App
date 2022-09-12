@@ -9,7 +9,17 @@
         android:id="@+id/currencyListFragment"
         android:name="my.project.currenciestestapp.presentation.fragments.currencyFragment.CurrencyListFragment"
 
-        tools:layout="@layout/fragment_currency_list"/>
-<!--        android:label="fragment_currency_list"-->
+        tools:layout="@layout/fragment_currency_list">
+        <action
+            android:id="@+id/action_currencyListFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="my.project.currenciestestapp.presentation.fragments.favoritesFragment.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+    </fragment>
 
 </navigation>

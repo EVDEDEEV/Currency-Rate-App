@@ -55,7 +55,6 @@ android {
         def lifecycle_version = '2.5.1'
         def arch_version = "2.1.0"
         def coroutines_version = '1.6.0'
-        def picasso = "2.71828"
         def paging_version = "3.1.1"
 
         implementation 'androidx.core:core-ktx:1.8.0'
@@ -103,8 +102,7 @@ android {
         // Annotation processor
         kapt "androidx.lifecycle:lifecycle-compiler:2.5.1"
 
-        //Picasso
-        implementation "com.squareup.picasso:picasso:$picasso"
+
 
         // Navigation
         implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

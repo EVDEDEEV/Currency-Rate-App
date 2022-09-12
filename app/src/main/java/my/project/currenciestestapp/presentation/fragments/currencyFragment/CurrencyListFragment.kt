@@ -59,7 +59,7 @@ class CurrencyListFragment : Fragment() {
 //    }
 
     private fun initRecyclerView() {
-        binding.rVcurrency.apply {
+        binding.recyclerViewCurrency.apply {
             adapter = currencyAdapter
             layoutManager = GridLayoutManager(
                 context, 2, GridLayoutManager.VERTICAL, false)

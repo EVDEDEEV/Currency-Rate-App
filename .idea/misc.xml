@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/layout/currency_item.xml" value="0.28672985781990523" />
+        <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/layout/favorites_item.xml" value="0.19010416666666666" />
         <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/layout/fragment_currency_list.xml" value="0.176" />
-        <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/layout/fragment_favorites.xml" value="0.1765625" />
-        <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/menu/bottom_menu.xml" value="0.1671875" />
+        <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/layout/fragment_favorites.xml" value="0.2" />
+        <entry key="..\:/ASProjects2/urrenciesTestApp/app/src/main/res/menu/bottom_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

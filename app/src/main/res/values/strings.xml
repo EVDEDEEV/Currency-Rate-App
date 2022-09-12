@@ -2,6 +2,8 @@
     <string name="app_name">СurrenciesTestApp</string>
     <string name="usd">USD</string>
     <string name="currencyRate">1.56</string>
-    <string name="favorites">Favorites</string>
+    <string name="favorites">FAVORITES</string>
     <string name="home">home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
