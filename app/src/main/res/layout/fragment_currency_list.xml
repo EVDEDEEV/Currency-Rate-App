@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/light_gray"
+    android:background="@color/light_gray2"
     tools:context=".presentation.fragments.currencyFragment.CurrencyListFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -21,84 +21,68 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".96" />
 
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
+        style="@style/CustomCardViewStyle"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:layout_marginTop="20dp"
         android:clipToPadding="false"
+        app:cardBackgroundColor="#ECF3FF"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
+        app:contentPadding="4dp"
         app:layout_constraintEnd_toEndOf="@id/guideline92"
         app:layout_constraintStart_toStartOf="@id/guideline08"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/gold"
+        app:strokeWidth="1dp">
+        <!--        #0F87FF-->
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1">
+            android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/aldrich"
+                android:text="@string/select_currency"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@id/currencyListSpinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.card.MaterialCardView
-                style="@style/CustomCardViewStyle"
+            <Spinner
+                android:id="@+id/currencyListSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="#ECF3FF"
-                app:contentPadding="4dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="20dp"
+                android:dropDownWidth="300dp"
+                android:dropDownVerticalOffset="50dp"
+                android:entries="@array/currency_codes"
+                android:popupBackground="@color/light_gray2"
+                android:spinnerMode="dropdown"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:strokeColor="#0F87FF"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_marginStart="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:text="@string/select_currency" />
-
-                    <Spinner
-                        android:id="@+id/currencyListSpinner"
-                        android:entries="@array/currency_codes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"/>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCurrency"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scrollbars="vertical"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline92"
         app:layout_constraintStart_toEndOf="@+id/guideline08"
-        tools:listitem="@layout/currency_item"
-        android:scrollbars="vertical"
-        android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"/>
-
-<!--    <TextView-->
-<!--        android:id="@+id/helloField"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="40dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:text="Hello"/>-->
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        tools:listitem="@layout/currency_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
