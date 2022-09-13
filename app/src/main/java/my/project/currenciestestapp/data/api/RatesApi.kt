@@ -11,7 +11,6 @@ interface RatesApi {
 
     @GET("latest")
     suspend fun getCurrency(
-//        @Query("apikey") apiKey: String = API_KEY,
         @Query("base") base: String,
     ): Response<RatesResponse>
 }

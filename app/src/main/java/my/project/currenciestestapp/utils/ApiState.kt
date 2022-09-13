@@ -1,7 +1,6 @@
 package my.project.currenciestestapp.utils
 
 import my.project.currenciestestapp.data.models.remote.RatesResponse
-import my.project.currenciestestapp.presentation.models.RatesUiModel
 import retrofit2.Response
 
 sealed class ApiState{

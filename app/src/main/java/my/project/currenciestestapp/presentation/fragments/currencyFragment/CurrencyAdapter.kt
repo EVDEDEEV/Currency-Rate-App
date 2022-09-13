@@ -6,17 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
 import my.project.currenciestestapp.databinding.CurrencyItemBinding
-import my.project.currenciestestapp.presentation.models.RatesUiModel
 
-//class CurrencyAdapter :
-//    RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
 class CurrencyAdapter :
-    ListAdapter<RatesUiModel, CurrencyAdapter.CurrencyViewHolder>(DIFF_CALLBACK) {
-
-//    private var listCurrency = emptyList<RatesUiModel>()
-//    private var listCurrency = emptyList<FakeList>()
-
+    ListAdapter<CurrencyEntity, CurrencyAdapter.CurrencyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
         val binding = CurrencyItemBinding
@@ -25,9 +19,6 @@ class CurrencyAdapter :
 
     }
 
-    //    override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
-//        holder.bind(listCurrency[position])
-//    }
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -39,20 +30,20 @@ class CurrencyAdapter :
     inner class CurrencyViewHolder(
         private val binding: CurrencyItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(ratesUi: RatesUiModel) {
-            val rateDoubleValue = ratesUi.rates
-            binding.currencyName.text = ratesUi.currencyName
+        fun bind(currencyEntity: CurrencyEntity) {
+            val rateDoubleValue = currencyEntity.rate
+            binding.currencyName.text = currencyEntity.currencyName
             binding.currencyRate.text = String.format("%.2f", rateDoubleValue)
         }
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RatesUiModel>() {
-            override fun areItemsTheSame(oldItem: RatesUiModel, newItem: RatesUiModel): Boolean =
-                oldItem.id == newItem.id
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CurrencyEntity>() {
+            override fun areItemsTheSame(oldItem: CurrencyEntity, newItem: CurrencyEntity): Boolean =
+                oldItem.currencyName == newItem.currencyName
 
             @SuppressLint("DiffUtilEquals")
-            override fun areContentsTheSame(oldItem: RatesUiModel, newItem: RatesUiModel): Boolean =
+            override fun areContentsTheSame(oldItem: CurrencyEntity, newItem: CurrencyEntity): Boolean =
                 oldItem == newItem
         }
     }

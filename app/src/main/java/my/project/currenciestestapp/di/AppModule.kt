@@ -23,12 +23,6 @@ object AppModule {
         return retrofit.create(RatesApi::class.java)
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideCurrenciesApiInterface(retrofit: Retrofit): CurrenciesApi {
-//        return retrofit.create(CurrenciesApi::class.java)
-//    }
-
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {

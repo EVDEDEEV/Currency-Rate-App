@@ -25,19 +25,24 @@ class CurrencyListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false)
-        setDataFromApiToLocalUiModel()
         initRecyclerView()
-        setDataToRecyclerView()
         selectedCurrencyItemListener()
+//        setDataToRecyclerView()
         return binding.root
     }
 
-    private fun setDataFromApiToLocalUiModel() {
+    private fun getDataFromApiToRoomEntity() {
         val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
         viewModel.getRates(baseCurrency)
     }
 
+    private fun getRatesFromDb(base: String) {
+//        val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
+        viewModel.getRatesFromDb(base)
+    }
+
     private fun selectedCurrencyItemListener() {
+
         binding.currencyListSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -48,19 +53,16 @@ class CurrencyListFragment : Fragment() {
                 ) {
                     if (pos >= 0) {
                         val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
-                        viewModel.getRates(baseCurrency)
+                        getRatesFromDb(baseCurrency)
+                        setDataToRecyclerView()
                     }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
-        viewModel.currencies.observe(viewLifecycleOwner) {
-            currencyAdapter.submitList(it)
-        }
     }
 
     private fun setDataToRecyclerView() {
-        binding.recyclerViewCurrency.visibility = View.VISIBLE
         viewModel.currencies.observe(viewLifecycleOwner) {
             currencyAdapter.submitList(it)
         }

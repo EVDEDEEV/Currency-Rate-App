@@ -1,6 +1,5 @@
 package my.project.currenciestestapp.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import dagger.Module
@@ -8,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import my.project.currenciestestapp.data.models.room.AppDatabase
-import my.project.currenciestestapp.data.models.room.RateDao
+import my.project.currenciestestapp.data.models.roomDataBase.AppDatabase
+import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
 import javax.inject.Singleton
 
 @Module
@@ -27,7 +26,7 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun providesRateDao(database: AppDatabase): RateDao {
+    fun providesRateDao(database: AppDatabase): CurrencyDao {
         return database.getRateDao()
     }
 }
