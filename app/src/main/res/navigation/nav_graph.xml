@@ -20,6 +20,9 @@
         android:name="my.project.currenciestestapp.presentation.fragments.favoritesFragment.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_currencyListFragment"
+            app:destination="@id/currencyListFragment" />
     </fragment>
 
 </navigation>
