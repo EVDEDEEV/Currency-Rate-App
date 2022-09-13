@@ -1,10 +1,10 @@
 package my.project.currenciestestapp.data.repository
 
-import my.project.currenciestestapp.data.api.CurrenciesApi
 import my.project.currenciestestapp.data.api.RatesApi
-import my.project.currenciestestapp.data.models.remote.Currency
+import my.project.currenciestestapp.data.models.remote.RatesResponse
 import my.project.currenciestestapp.data.models.room.RateDao
 import my.project.currenciestestapp.presentation.models.RatesUiModel
+import my.project.currenciestestapp.utils.Resource
 import javax.inject.Inject
 
 class RatesRepository @Inject constructor(
@@ -22,9 +22,9 @@ class RatesRepository @Inject constructor(
 
 
 
-//    suspend fun getRates(base: String): Resource<CurrencyResponse> {
+//    suspend fun getRates(base: String): Resource<RatesResponse> {
 //        return try {
-//            val response = currenciesApi.getCurrencies(base)
+//            val response = ratesApi.getCurrency(base)
 //            val result = response.body()
 //            if(response.isSuccessful && result != null) {
 //                Resource.Success(result)
@@ -48,8 +48,8 @@ class RatesRepository @Inject constructor(
 //        return currencies
 //    }
 //    apikey: String, base: String
-    suspend fun getRates(): List<RatesUiModel> {
-        val result = ratesApi.getRates().body()
+    suspend fun getRates(base: String): List<RatesUiModel> {
+        val result = ratesApi.getCurrency(base).body()
         val rates = result?.rates?.entries?.mapIndexed { index, entry ->
             RatesUiModel(
                 id = index.inc(),

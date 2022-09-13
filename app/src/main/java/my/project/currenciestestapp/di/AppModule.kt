@@ -1,14 +1,10 @@
 package my.project.currenciestestapp.di
 
-import android.content.Context
-import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import my.project.currenciestestapp.data.api.ApiKeyInterceptor
-import my.project.currenciestestapp.data.api.CurrenciesApi
 import my.project.currenciestestapp.data.api.RatesApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -27,11 +23,11 @@ object AppModule {
         return retrofit.create(RatesApi::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideCurrenciesApiInterface(retrofit: Retrofit): CurrenciesApi {
-        return retrofit.create(CurrenciesApi::class.java)
-    }
+//    @Singleton
+//    @Provides
+//    fun provideCurrenciesApiInterface(retrofit: Retrofit): CurrenciesApi {
+//        return retrofit.create(CurrenciesApi::class.java)
+//    }
 
     @Provides
     @Singleton

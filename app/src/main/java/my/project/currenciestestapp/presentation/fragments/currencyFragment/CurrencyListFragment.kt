@@ -25,9 +25,12 @@ class CurrencyListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false)
-//        setDataFromApiToLocalUiModel2()
         setDataFromApiToLocalUiModel()
         initRecyclerView()
+
+
+
+
         return binding.root
     }
 
@@ -37,27 +40,19 @@ class CurrencyListFragment : Fragment() {
     }
 
     private fun setDataFromApiToLocalUiModel() {
-        viewModel.getRates()
+
+        val selected = binding.currencyListSpinner.getItemAtPosition(binding.currencyListSpinner.selectedItemPosition)
+        val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
+        viewModel.getRates(selected as String)
     }
-//    private fun setDataFromApiToLocalUiModel() {
-//        viewModel.getPost()
-//    }
-//    private fun setDataFromApiToLocalUiModel2() {
-////        viewModel.getCurrencies()
-//        val aa = viewModel.getCurrencies()
-//        val dd = aa
-//    }
+
+
 
     private fun setDataToRecyclerView() {
         viewModel.currencies.observe(viewLifecycleOwner) {
             currencyAdapter.submitList(it)
         }
     }
-//    private fun setDataToRecyclerView() {
-//        viewModel.currencies.observe(viewLifecycleOwner) {
-//            currencyAdapter.submitList(it)
-//        }
-//    }
 
     private fun initRecyclerView() {
         binding.recyclerViewCurrency.apply {
