@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import my.project.currenciestestapp.data.models.roomDataBase.AppDatabase
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
+import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesDao
 import javax.inject.Singleton
 
 @Module
@@ -26,7 +27,12 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun providesRateDao(database: AppDatabase): CurrencyDao {
-        return database.getRateDao()
+    fun providesCurrencyDao(database: AppDatabase): CurrencyDao {
+        return database.getCurrencyDao()
+    }
+    @Singleton
+    @Provides
+    fun providesFavoritesDao(database: AppDatabase): FavoritesDao {
+        return database.getFavoritesDao()
     }
 }
