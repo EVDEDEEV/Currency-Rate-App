@@ -16,13 +16,13 @@ class FavoritesViewModel @Inject constructor(
     private val repository: RatesRepository,
 ) : ViewModel() {
 
-//    private val _favorites = MutableLiveData<List<FavoritesEntity>>()
-//    val favorites: LiveData<List<FavoritesEntity>> = _favorites
+    private val _favorites = MutableLiveData<List<FavoritesEntity>>()
+    val favorites: LiveData<List<FavoritesEntity>> = _favorites
 
-
-    fun addToFavor(currencyName: String, rate: Double) {
+    fun addToFavor(id: Int, currencyName: String, rate: Double) {
         insertInFavoritesEntity(
             FavoritesEntity(
+                id = id,
                 favoritesCurrencyName = currencyName,
                 favoriteRate = rate
             )
@@ -33,17 +33,15 @@ class FavoritesViewModel @Inject constructor(
         repository.insert(favoritesEntity)
     }
 
-    val loadFavoritesEntity = repository.getAllFavorites()
+//    val loadFavoritesEntity = repository.getAllFavorites()
+//    val ss = loadFavoritesEntity
 
-//    fun getFavoritesFromDb() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val favorites = repository.getAllFavorites()
-//            _favorites.postValue(favorites)
-//        }
-//
-//    }
-
-
+    fun getFavoritesFromDb() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val favorites = repository.getAllFavorites()
+            _favorites.postValue(favorites)
+        }
+    }
 
 
 }

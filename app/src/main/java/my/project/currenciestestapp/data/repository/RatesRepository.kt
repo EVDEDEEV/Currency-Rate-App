@@ -1,6 +1,5 @@
 package my.project.currenciestestapp.data.repository
 
-import androidx.lifecycle.LiveData
 import my.project.currenciestestapp.data.api.RatesApi
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
@@ -18,6 +17,7 @@ class RatesRepository @Inject constructor(
         val result = ratesApi.getCurrency(base).body()
         val currencyEntity = result?.rates?.entries?.map { entry ->
             CurrencyEntity(
+                id = 0,
                 currencyName = entry.key,
                 rate = entry.value
             )
@@ -33,7 +33,9 @@ class RatesRepository @Inject constructor(
         return favoritesEntity
     }
 
-     fun getAllFavorites(): LiveData<List<FavoritesEntity>> = favoritesDao.getAllFavorites()
+     fun getAllFavorites(): List<FavoritesEntity> {
+         return favoritesDao.getAllFavorites()
+     }
 
     // Local-> Room
     suspend fun getSavedExchangeRates(): List<CurrencyEntity> = ratesDao.getAllCurrency()

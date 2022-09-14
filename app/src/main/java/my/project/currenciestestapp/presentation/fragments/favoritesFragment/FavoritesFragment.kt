@@ -26,29 +26,28 @@ class FavoritesFragment : Fragment() {
     ): View {
         binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         initRecyclerView()
-//        getFavoritesFromDb()
+        getFavoritesFromDb()
         setDataToRecyclerView()
-//        initRecyclerView()
+        initRecyclerView()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setDataToRecyclerView()
-        initRecyclerView()
+//        setDataToRecyclerView()
+//        initRecyclerView()
     }
 
-//    private fun getFavoritesFromDb() {
-//        favoritesViewModel.getFavoritesFromDb()
-//    }
+    private fun getFavoritesFromDb() {
+        favoritesViewModel.getFavoritesFromDb()
+    }
 
     private fun setDataToRecyclerView() {
-        favoritesViewModel.loadFavoritesEntity.observe(viewLifecycleOwner, Observer {
+        favoritesViewModel.favorites.observe(viewLifecycleOwner, Observer {
             favoritesAdapter.setList(it)
             favoritesAdapter.notifyDataSetChanged()
         })
     }
-
 
     private fun initRecyclerView() {
         binding.recyclerViewFavorites.apply {

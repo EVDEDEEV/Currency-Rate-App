@@ -27,7 +27,7 @@ class FavoritesAdapter :
         return favorites.size
     }
 
-    inner class FavoritesViewHolder(
+    class FavoritesViewHolder(
         private val binding: FavoritesItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(favoritesEntity: FavoritesEntity) {

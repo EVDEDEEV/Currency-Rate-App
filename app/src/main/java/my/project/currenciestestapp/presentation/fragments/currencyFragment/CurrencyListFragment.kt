@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +22,6 @@ class CurrencyListFragment : Fragment() {
     private val favoritesViewModel: FavoritesViewModel by viewModels()
     private val currencyViewModel: CurrencyListViewModel by viewModels()
     private lateinit var binding: FragmentCurrencyListBinding
-
-    //    private val currencyAdapter = CurrencyAdapter {
-//        currencyViewModel.addToFavor(it)
-//    }
-//    private val currencyAdapter by lazy { CurrencyAdapter() }
     private var currencyAdapter: CurrencyAdapter? = null
 
     override fun onCreateView(
@@ -35,6 +31,7 @@ class CurrencyListFragment : Fragment() {
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false)
         initRecyclerView()
         selectedCurrencyItemListener()
+        initFilterButton()
         return binding.root
     }
 
@@ -62,7 +59,6 @@ class CurrencyListFragment : Fragment() {
                         setDataToRecyclerView()
                     }
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
     }
@@ -93,8 +89,16 @@ class CurrencyListFragment : Fragment() {
 
     private fun addToFavorites(currencyEntity: CurrencyEntity) {
         favoritesViewModel.addToFavor(
+            id = currencyEntity.id,
             currencyName = currencyEntity.currencyName,
             rate = currencyEntity.rate
         )
+    }
+
+    private fun initFilterButton() {
+        binding.filterButton.setOnClickListener {
+            val action = CurrencyListFragmentDirections.actionCurrencyListFragmentToFilterBottomSheetFragment()
+            view?.findNavController()?.navigate(action)
+        }
     }
 }

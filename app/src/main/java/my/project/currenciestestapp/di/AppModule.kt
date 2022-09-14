@@ -9,6 +9,7 @@ import my.project.currenciestestapp.data.api.RatesApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 private const val BASE_URL = "https://api.apilayer.com/exchangerates_data/"
@@ -23,10 +24,14 @@ object AppModule {
         return retrofit.create(RatesApi::class.java)
     }
 
+
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
-        val client = OkHttpClient.Builder().addInterceptor(ApiKeyInterceptor()).build()
+        val client = OkHttpClient.Builder().addInterceptor(ApiKeyInterceptor())
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS).build()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
