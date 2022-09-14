@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/byCurrencyNameFilter"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="@id/byCurrencyRateFilter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/aldrich"
+            android:text="Filter by currency name "
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            style="@style/CustomCardViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/gold"
+            android:fontFamily="@font/aldrich"
+            android:text="Sort ascending"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray2"
+            android:fontFamily="@font/aldrich"
+            android:text="Sort descending"
+            android:textSize="20sp" />
+    </RadioGroup>
+
+
+    <RadioGroup
+        android:id="@+id/byCurrencyRateFilter"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/byCurrencyNameFilter">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/aldrich"
+            android:text="Filter by currency rate value"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+
+        <RadioButton
+            style="@style/CustomCardViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/gold"
+            android:fontFamily="@font/aldrich"
+            android:text="Sort ascending"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray2"
+            android:fontFamily="@font/aldrich"
+            android:text="Sort descending"
+            android:textSize="20sp" />
+    </RadioGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

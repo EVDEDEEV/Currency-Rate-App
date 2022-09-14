@@ -34,17 +34,24 @@ class CurrencyListViewModel @Inject constructor(
         object Empty : CurrencyEvent()
     }
 
-    fun getRates(base: String) {
+    fun getRatesFromApi(base: String) {
     viewModelScope.launch(Dispatchers.IO) {
         val result = repository.getRatesFromApi(base)
         _currencies.postValue(result)
         }
     }
 
-    fun getRatesFromDb(base: String) {
+    fun getRatesFromDb() {
         viewModelScope.launch(Dispatchers.IO) {
-            getRates(base)
             repository.getSavedExchangeRates()
         }
     }
+
+//    fun addToFavor(currencyEntity: CurrencyEntity) {
+//        viewModelScope.launch {
+//            repository.addToFav(currencyEntity)
+//        }
+//    }
+
+
 }

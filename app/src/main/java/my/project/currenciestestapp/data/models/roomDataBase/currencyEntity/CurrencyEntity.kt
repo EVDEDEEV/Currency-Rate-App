@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "currencyTable")
 data class CurrencyEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "currencyName")
     var currencyName: String,
     @ColumnInfo(name = "rate")

@@ -24,5 +24,13 @@
             android:id="@+id/action_favoritesFragment_to_currencyListFragment"
             app:destination="@id/currencyListFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/filterBottomSheetFragment"
+        android:name="my.project.currenciestestapp.presentation.fragments.FilterBottomSheetFragment"
+        android:label="FilterBottomSheetFragment" >
+        <action
+            android:id="@+id/action_filterBottomSheetFragment_to_currencyListFragment"
+            app:destination="@id/currencyListFragment" />
+    </dialog>
 
 </navigation>

@@ -7,7 +7,7 @@ import androidx.room.*
 interface CurrencyDao {
 
     @Query("SELECT * FROM currencyTable")
-    suspend fun getAllList(): List<CurrencyEntity>
+    suspend fun getAllCurrency(): List<CurrencyEntity>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateAllRate(rateList: List<CurrencyEntity>)

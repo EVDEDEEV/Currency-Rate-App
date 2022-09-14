@@ -5,10 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favoritesTable")
-data class FavoritesEntity(
-    @PrimaryKey
-    @ColumnInfo(name = "currencyName")
-    var currencyName: String,
-    @ColumnInfo(name = "rate")
-    var rate: Double,
+class FavoritesEntity(
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "favoriteCurrencyName")
+    var favoritesCurrencyName: String,
+    @ColumnInfo(name = "favoriteRate")
+    var favoriteRate: Double,
 )
