@@ -4,19 +4,21 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface FavoritesDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addToFavorites(FavoritesEntity: FavoritesEntity)
 
-    @Query("SELECT * FROM favoritesTable")
-    fun getAllFavorites(): List<FavoritesEntity>
+    @Query("SELECT * FROM favorites_table")
+    fun getAllFavorites(): Flow<List<FavoritesEntity>>
 
-    @Query("SELECT * FROM favoritesTable WHERE favoriteCurrencyName = :favoriteCurrencyName")
+    @Query("SELECT * FROM favorites_table WHERE favorite_currency_name = :favoriteCurrencyName")
     suspend fun getFavoriteByName(favoriteCurrencyName: String): FavoritesEntity
 
-    @Query("DELETE FROM favoritesTable WHERE favoriteCurrencyName = :favoriteCurrencyName")
+    @Query("DELETE FROM favorites_table WHERE favorite_currency_name = :favoriteCurrencyName")
     suspend fun deleteFavoriteByName(favoriteCurrencyName: String)
 }

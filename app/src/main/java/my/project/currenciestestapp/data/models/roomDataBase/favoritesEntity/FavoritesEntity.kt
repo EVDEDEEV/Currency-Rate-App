@@ -4,13 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favoritesTable")
-class FavoritesEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "favorites_id")
-    var id:Int,
-    @ColumnInfo(name = "favoriteCurrencyName")
+@Entity(tableName = "favorites_table")
+data class FavoritesEntity(
+    @PrimaryKey
+    @ColumnInfo(name = "favorite_currency_name")
     var favoritesCurrencyName: String,
-    @ColumnInfo(name = "favoriteRate")
+    @ColumnInfo(name = "favorite_rate")
     var favoriteRate: Double,
 )
+

@@ -5,7 +5,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import my.project.currenciestestapp.data.api.ApiKeyInterceptor
-import my.project.currenciestestapp.data.api.RatesApi
+import my.project.currenciestestapp.data.api.CurrencyApi
+import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
+import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesDao
+import my.project.currenciestestapp.data.repository.DefaultRepository
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,10 +23,9 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRatesApiInterface(retrofit: Retrofit): RatesApi {
-        return retrofit.create(RatesApi::class.java)
+    fun provideRatesApiInterface(retrofit: Retrofit): CurrencyApi {
+        return retrofit.create(CurrencyApi::class.java)
     }
-
 
     @Provides
     @Singleton
@@ -55,9 +57,8 @@ object AppModule {
 //        provideApiInterface(provideRetrofit()))
 
 
-//    @Singleton
-//    @Provides
-//    fun provideCurrencyRepository(ratesDao: CurrencyDao, currencyApi: CurrencyApi) =
-//        CurrencyRepositoryImpl(ratesDao, currencyApi) as CurrencyRepository
-
+    @Singleton
+    @Provides
+    fun provideCurrencyRepository(currencyDao: CurrencyDao, favoritesDao: FavoritesDao, currencyApi: CurrencyApi) =
+        DefaultRepository(currencyDao,currencyApi, favoritesDao)
 }

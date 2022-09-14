@@ -9,15 +9,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import my.project.currenciestestapp.data.api.RatesApi
+import my.project.currenciestestapp.data.api.CurrencyApi
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
-import my.project.currenciestestapp.data.repository.RatesRepository
+import my.project.currenciestestapp.data.repository.DefaultRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class CurrencyListViewModel @Inject constructor(
-    private val repository: RatesRepository,
-    private val api: RatesApi,
+    private val repository: DefaultRepository,
+    private val api: CurrencyApi,
 ) : ViewModel() {
 
     private val _currencies = MutableLiveData<List<CurrencyEntity>>()
@@ -46,12 +46,5 @@ class CurrencyListViewModel @Inject constructor(
             repository.getSavedExchangeRates()
         }
     }
-
-//    fun addToFavor(currencyEntity: CurrencyEntity) {
-//        viewModelScope.launch {
-//            repository.addToFav(currencyEntity)
-//        }
-//    }
-
 
 }

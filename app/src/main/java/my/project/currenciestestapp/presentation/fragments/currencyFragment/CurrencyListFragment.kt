@@ -29,10 +29,14 @@ class CurrencyListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         selectedCurrencyItemListener()
         initFilterButton()
-        return binding.root
     }
 
     private fun getRatesFromApi(base: String) {
@@ -89,7 +93,6 @@ class CurrencyListFragment : Fragment() {
 
     private fun addToFavorites(currencyEntity: CurrencyEntity) {
         favoritesViewModel.addToFavor(
-            id = currencyEntity.id,
             currencyName = currencyEntity.currencyName,
             rate = currencyEntity.rate
         )

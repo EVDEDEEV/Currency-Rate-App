@@ -10,7 +10,7 @@ import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.Fav
 @Database(entities = [CurrencyEntity::class, FavoritesEntity::class], version = AppDatabase.VERSION)
 abstract class AppDatabase: RoomDatabase() {
     companion object {
-        const val VERSION = 3
+        const val VERSION = 1
         const val NAME = "app-db"
     }
     abstract fun getCurrencyDao(): CurrencyDao

@@ -1,23 +1,23 @@
 package my.project.currenciestestapp.data.repository
 
-import my.project.currenciestestapp.data.api.RatesApi
+import kotlinx.coroutines.flow.Flow
+import my.project.currenciestestapp.data.api.CurrencyApi
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesDao
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesEntity
 import javax.inject.Inject
 
-class RatesRepository @Inject constructor(
+class DefaultRepository @Inject constructor(
     private val ratesDao: CurrencyDao,
-    private val ratesApi: RatesApi,
+    private val currencyApi: CurrencyApi,
     private val favoritesDao: FavoritesDao,
 ) {
 
     suspend fun getRatesFromApi(base: String): List<CurrencyEntity> {
-        val result = ratesApi.getCurrency(base).body()
+        val result = currencyApi.getCurrency(base).body()
         val currencyEntity = result?.rates?.entries?.map { entry ->
             CurrencyEntity(
-                id = 0,
                 currencyName = entry.key,
                 rate = entry.value
             )
@@ -25,17 +25,13 @@ class RatesRepository @Inject constructor(
         return currencyEntity
     }
 
-//    suspend fun addToFav(currency: CurrencyEntity) {
-//        favoritesDao.addToFavorites(currency)
-//    }
-
-    fun insert(favoritesEntity: FavoritesEntity): FavoritesEntity {
-        return favoritesEntity
+    suspend fun insert(favoritesEntity: FavoritesEntity) {
+        favoritesDao.addToFavorites(favoritesEntity)
     }
 
-     fun getAllFavorites(): List<FavoritesEntity> {
-         return favoritesDao.getAllFavorites()
-     }
+    fun getAllFavorites(): Flow<List<FavoritesEntity>> {
+        return favoritesDao.getAllFavorites()
+    }
 
     // Local-> Room
     suspend fun getSavedExchangeRates(): List<CurrencyEntity> = ratesDao.getAllCurrency()

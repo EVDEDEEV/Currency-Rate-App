@@ -26,11 +26,6 @@ class CurrencyAdapter(private val addToFavorites: (CurrencyEntity) -> Unit) :
         return currentList.size
     }
 
-//    fun setList(currencyList: List<CurrencyEntity>) {
-//        currentList.clear()
-//        currentList.addAll(currencyList)
-//    }
-
     class CurrencyViewHolder(
         private val binding: CurrencyItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -55,7 +50,6 @@ class CurrencyAdapter(private val addToFavorites: (CurrencyEntity) -> Unit) :
             ): Boolean =
                 oldItem.currencyName == newItem.currencyName
 
-            //            @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
                 oldItem: CurrencyEntity,
                 newItem: CurrencyEntity,

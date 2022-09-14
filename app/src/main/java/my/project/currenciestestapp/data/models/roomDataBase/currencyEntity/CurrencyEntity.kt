@@ -6,10 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "currencyTable")
 data class CurrencyEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "currency_id")
-    var id:Int,
-    @ColumnInfo(name = "currencyName")
+    @PrimaryKey
+    @ColumnInfo(name = "currency_name")
     var currencyName: String,
     @ColumnInfo(name = "rate")
     var rate: Double,
