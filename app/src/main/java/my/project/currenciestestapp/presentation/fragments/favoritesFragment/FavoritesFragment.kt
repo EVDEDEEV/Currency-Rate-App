@@ -13,13 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesEntity
 import my.project.currenciestestapp.databinding.FragmentFavoritesBinding
 
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
-    private val favoritesAdapter by lazy { FavoritesAdapter() }
+    private var favoritesAdapter: FavoritesAdapter? = null
+//    private val favoritesAdapter by lazy { FavoritesAdapter() }
     private val favoritesViewModel: FavoritesViewModel by viewModels()
     private lateinit var binding: FragmentFavoritesBinding
 
@@ -33,7 +35,6 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        getFavoritesFromDb()
         setDataToRecyclerView()
         initRecyclerView()
     }
@@ -41,18 +42,28 @@ class FavoritesFragment : Fragment() {
     private fun setDataToRecyclerView() {
         lifecycleScope.launch {
             favoritesViewModel.favorites.collect { data ->
-                favoritesAdapter.submitList(data)
+                favoritesAdapter?.submitList(data)
             }
         }
     }
 
     private fun initRecyclerView() {
         binding.recyclerViewFavorites.apply {
+
+            favoritesAdapter = FavoritesAdapter { favoritesEntity: FavoritesEntity ->
+                deleteFromFavorites(favoritesEntity)
+            }
+
             adapter = favoritesAdapter
             layoutManager = LinearLayoutManager(
                 context, LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL))
         }
+    }
+
+    private fun deleteFromFavorites(favoritesEntity: FavoritesEntity) {
+        favoritesViewModel.removeFromFavorites(favoritesEntity.favoritesCurrencyName)
+
     }
 }
 

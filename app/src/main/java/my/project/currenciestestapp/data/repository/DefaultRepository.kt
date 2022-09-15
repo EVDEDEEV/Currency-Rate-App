@@ -14,7 +14,6 @@ class DefaultRepository @Inject constructor(
     private val favoritesDao: FavoritesDao,
 ) {
 
-
     suspend fun getRatesFromApi(base: String) {
         val result = currencyApi.getCurrency(base).body()
         val currencyEntity = result?.rates?.entries?.map { entry ->
@@ -37,6 +36,12 @@ class DefaultRepository @Inject constructor(
 
     // Local-> Room
     fun getSavedExchangeRates(): Flow<List<CurrencyEntity>> = currencyDao.getAllCurrency()
+
+    suspend fun deleteFavoriteItem(itemName: String) {
+        favoritesDao.deleteFavoriteByName(itemName)
+
+
+    }
 //    suspend fun updateAllExchangeRates(saveList: List<Currency>) = ratesDao.updateAllRate(saveList)
 
 
