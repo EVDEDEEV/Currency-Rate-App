@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -35,8 +36,16 @@ class CurrencyListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        selectedCurrencyItemListener()
+//        selectedCurrencyItemListener()
         initFilterButton()
+    }
+
+    private fun filter() {
+        setFragmentResultListener("filterByName") { filterByName, bundle ->
+            val result = bundle.getBundle("bundleKey")
+
+
+        }
     }
 
     private fun getRatesFromApi(base: String) {
@@ -63,13 +72,15 @@ class CurrencyListFragment : Fragment() {
                         setDataToRecyclerView()
                     }
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
     }
 
+
     private fun setDataToRecyclerView() {
-        currencyViewModel.currencies.observe(viewLifecycleOwner) {
-            currencyAdapter?.submitList(it)
+        currencyViewModel.currencies.observe(viewLifecycleOwner) { it ->
+            currencyAdapter?.submitList(it.sortedByDescending { it.rate })
         }
     }
 
@@ -100,7 +111,8 @@ class CurrencyListFragment : Fragment() {
 
     private fun initFilterButton() {
         binding.filterButton.setOnClickListener {
-            val action = CurrencyListFragmentDirections.actionCurrencyListFragmentToFilterBottomSheetFragment()
+            val action =
+                CurrencyListFragmentDirections.actionCurrencyListFragmentToFilterBottomSheetFragment()
             view?.findNavController()?.navigate(action)
         }
     }
