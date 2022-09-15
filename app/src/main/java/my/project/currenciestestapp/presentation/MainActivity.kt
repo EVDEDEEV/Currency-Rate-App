@@ -11,18 +11,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import my.project.currenciestestapp.R
 import my.project.currenciestestapp.databinding.ActivityMainBinding
 import androidx.appcompat.widget.Toolbar
+import by.kirich1409.viewbindingdelegate.viewBinding
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding by viewBinding(ActivityMainBinding::bind)
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         navController = findNavController(R.id.navHostFragment)
         binding.bottomNavigationView.setupWithNavController(navController)
