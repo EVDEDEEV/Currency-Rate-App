@@ -19,7 +19,6 @@ class FilterBottomSheetFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-
         binding = FragmentFilterBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -27,19 +26,16 @@ class FilterBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
     }
 
 
 
 
-//    private fun initFilterByName() {
-//        binding.byCurrencyNameFilter.setOnCheckedChangeListener { _, _ ->
-//            binding.ascendingName.apply {
-//                val result = FragmentManager.findFragment<CurrencyListFragment>()
-//                setFragmentResult("requestKey", bundleOf("bundleKey" to result))
-//            }
-////            binding.descendingName.
-//
-//        }
-//    }
+    private fun initFilterByName() {
+        binding.ascendingName.setOnClickListener {
+
+        }
+    }
+
 }

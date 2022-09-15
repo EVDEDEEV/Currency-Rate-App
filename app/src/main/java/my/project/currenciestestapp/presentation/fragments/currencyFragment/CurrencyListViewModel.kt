@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
+import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesEntity
 import my.project.currenciestestapp.data.repository.DefaultRepository
 import javax.inject.Inject
 
@@ -16,19 +19,17 @@ class CurrencyListViewModel @Inject constructor(
     private val repository: DefaultRepository,
 ) : ViewModel() {
 
-    private val _currencies = MutableLiveData<List<CurrencyEntity>>()
-    val currencies: LiveData<List<CurrencyEntity>> = _currencies
+    val currencies: Flow<List<CurrencyEntity>> = repository.getSavedExchangeRates()
 
     fun getRatesFromApi(base: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = repository.getRatesFromApi(base)
-            _currencies.postValue(result)
+            repository.getRatesFromApi(base)
         }
     }
 
-    fun getRatesFromDb() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getSavedExchangeRates()
-        }
-    }
+//    fun getRatesFromDb() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            repository.getSavedExchangeRates()
+//        }
+//    }
 }

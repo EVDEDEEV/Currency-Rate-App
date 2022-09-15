@@ -8,11 +8,13 @@ import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
 import my.project.currenciestestapp.databinding.FragmentCurrencyListBinding
 import my.project.currenciestestapp.presentation.fragments.favoritesFragment.FavoritesViewModel
@@ -24,6 +26,7 @@ class CurrencyListFragment : Fragment() {
     private val currencyViewModel: CurrencyListViewModel by viewModels()
     private lateinit var binding: FragmentCurrencyListBinding
     private var currencyAdapter: CurrencyAdapter? = null
+    private val baseStartCurrency = "AED"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,24 +39,19 @@ class CurrencyListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-//        selectedCurrencyItemListener()
+        setDataToRecyclerView()
+        selectedCurrencyItemListener()
         initFilterButton()
     }
 
     private fun filter() {
         setFragmentResultListener("filterByName") { filterByName, bundle ->
             val result = bundle.getBundle("bundleKey")
-
-
         }
     }
 
     private fun getRatesFromApi(base: String) {
         currencyViewModel.getRatesFromApi(base)
-    }
-
-    private fun getRatesFromDb() {
-        currencyViewModel.getRatesFromDb()
     }
 
     private fun selectedCurrencyItemListener() {
@@ -65,10 +63,15 @@ class CurrencyListFragment : Fragment() {
                     pos: Int,
                     id: Long,
                 ) {
-                    if (pos >= 0) {
-                        val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
+                    if (pos >= 1) {
+                        val baseCurrency =
+                            binding.currencyListSpinner.selectedItem.toString()
                         getRatesFromApi(baseCurrency)
-                        getRatesFromDb()
+                        setDataToRecyclerView()
+                    } else if(pos == 0 && currencyAdapter?.currentList?.isEmpty() == true ) {
+                        getRatesFromApi(baseStartCurrency)
+                        setDataToRecyclerView()
+                    } else {
                         setDataToRecyclerView()
                     }
                 }
@@ -79,8 +82,10 @@ class CurrencyListFragment : Fragment() {
 
 
     private fun setDataToRecyclerView() {
-        currencyViewModel.currencies.observe(viewLifecycleOwner) { it ->
-            currencyAdapter?.submitList(it.sortedByDescending { it.rate })
+        lifecycleScope.launch {
+            currencyViewModel.currencies.collect { data ->
+                currencyAdapter?.submitList(data)
+            }
         }
     }
 
