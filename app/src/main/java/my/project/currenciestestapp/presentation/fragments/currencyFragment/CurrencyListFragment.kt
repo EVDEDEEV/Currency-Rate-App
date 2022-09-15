@@ -26,7 +26,6 @@ class CurrencyListFragment : Fragment() {
     private val currencyViewModel: CurrencyListViewModel by viewModels()
     private lateinit var binding: FragmentCurrencyListBinding
     private var currencyAdapter: CurrencyAdapter? = null
-    private val baseStartCurrency = "AED"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,9 +67,7 @@ class CurrencyListFragment : Fragment() {
                             binding.currencyListSpinner.selectedItem.toString()
                         getRatesFromApi(baseCurrency)
                         setDataToRecyclerView()
-                    } else if(pos == 0 && currencyAdapter?.currentList?.isEmpty() == true ) {
-                        getRatesFromApi(baseStartCurrency)
-                        setDataToRecyclerView()
+                        //Новый запрос при смене фрагментов
                     } else {
                         setDataToRecyclerView()
                     }

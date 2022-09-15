@@ -16,9 +16,9 @@ interface FavoritesDao {
     @Query("SELECT * FROM favorites_table")
     fun getAllFavorites(): Flow<List<FavoritesEntity>>
 
-    @Query("SELECT * FROM favorites_table WHERE favorite_currency_name = :favoriteCurrencyName")
-    suspend fun getFavoriteByName(favoriteCurrencyName: String): FavoritesEntity
-
     @Query("DELETE FROM favorites_table WHERE favorite_currency_name = :favoriteCurrencyName")
     suspend fun deleteFavoriteByName(favoriteCurrencyName: String)
+
+    @Query("DELETE FROM favorites_table")
+    suspend fun deleteAllItemsFromFavorites()
 }

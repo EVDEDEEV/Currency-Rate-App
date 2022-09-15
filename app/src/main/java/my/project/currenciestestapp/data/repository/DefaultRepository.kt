@@ -39,10 +39,12 @@ class DefaultRepository @Inject constructor(
 
     suspend fun deleteFavoriteItem(itemName: String) {
         favoritesDao.deleteFavoriteByName(itemName)
-
-
     }
-//    suspend fun updateAllExchangeRates(saveList: List<Currency>) = ratesDao.updateAllRate(saveList)
+
+    suspend fun deleteAllFavorites() {
+        favoritesDao.deleteAllItemsFromFavorites()
+    }
+
 
 
 }
