@@ -8,7 +8,7 @@ import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.Fav
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesEntity
 import javax.inject.Inject
 
-class DefaultRepository @Inject constructor(
+class CurrencyListRepository @Inject constructor(
     private val currencyDao: CurrencyDao,
     private val currencyApi: CurrencyApi,
     private val favoritesDao: FavoritesDao,
@@ -25,26 +25,9 @@ class DefaultRepository @Inject constructor(
         currencyDao.insertAll(currencyEntity)
     }
 
-
     suspend fun insert(favoritesEntity: FavoritesEntity) {
         favoritesDao.addToFavorites(favoritesEntity)
     }
 
-    fun getAllFavorites(): Flow<List<FavoritesEntity>> {
-        return favoritesDao.getAllFavorites()
-    }
-
-    // Local-> Room
     fun getSavedExchangeRates(): Flow<List<CurrencyEntity>> = currencyDao.getAllCurrency()
-
-    suspend fun deleteFavoriteItem(itemName: String) {
-        favoritesDao.deleteFavoriteByName(itemName)
-    }
-
-    suspend fun deleteAllFavorites() {
-        favoritesDao.deleteAllItemsFromFavorites()
-    }
-
-
-
 }

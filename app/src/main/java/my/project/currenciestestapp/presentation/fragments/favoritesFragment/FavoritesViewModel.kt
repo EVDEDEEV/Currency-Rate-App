@@ -6,15 +6,17 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesEntity
-import my.project.currenciestestapp.data.repository.DefaultRepository
+import my.project.currenciestestapp.data.repository.CurrencyListRepository
+import my.project.currenciestestapp.data.repository.FavoriteListRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
-    private val repository: DefaultRepository,
+    private val currencyRepository: CurrencyListRepository,
+    private val favoritesRepository: FavoriteListRepository
 ) : ViewModel() {
 
-    val favorites: Flow<List<FavoritesEntity>> = repository.getAllFavorites()
+    val favorites: Flow<List<FavoritesEntity>> = favoritesRepository.getAllFavorites()
 
     fun addToFavor(currencyName: String, rate: Double) {
         insertInFavoritesEntity(
@@ -26,15 +28,14 @@ class FavoritesViewModel @Inject constructor(
     }
 
     private fun insertInFavoritesEntity(favoritesEntity: FavoritesEntity) = viewModelScope.launch {
-        repository.insert(favoritesEntity)
+        currencyRepository.insert(favoritesEntity)
     }
 
-
     fun removeFromFavorites(favoriteName: String) = viewModelScope.launch {
-        repository.deleteFavoriteItem(favoriteName)
+        favoritesRepository.deleteFavoriteItem(favoriteName)
     }
 
     fun deleteAllFavoritesItems() = viewModelScope.launch {
-        repository.deleteAllFavorites()
+        favoritesRepository.deleteAllFavorites()
     }
 }
