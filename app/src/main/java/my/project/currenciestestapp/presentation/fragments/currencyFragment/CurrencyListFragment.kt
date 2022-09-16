@@ -40,20 +40,14 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        setupCurrencyItemSelectedListener()
+        checkInternetConnectionAndRefreshData()
         setDataToRecyclerView()
-        filterListByNameAscending()
-        filterListByNameDescending()
-        filterListByRateAscending()
-        filterListByRateDescending()
-        selectedCurrencyItemListener()
+        initFiltersByCurrencyNameAndRate()
         initFilterButton()
     }
 
-    private fun getRatesFromApi(base: String) {
-        currencyViewModel.getRatesFromApi(base)
-    }
-
-    private fun selectedCurrencyItemListener() {
+    private fun setupCurrencyItemSelectedListener() {
         with(binding) {
             currencyListSpinner.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
@@ -64,10 +58,7 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
                         id: Long,
                     ) {
                         if (pos >= 0) {
-                            val baseCurrency =
-                                currencyListSpinner.selectedItem.toString()
-                            getRatesFromApi(baseCurrency)
-                            setDataToRecyclerView()
+                            checkInternetConnectionAndRefreshData()
                         }
                     }
 
@@ -76,8 +67,52 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
         }
     }
 
+
+    fun checkInternetConnectionAndRefreshData() {
+        val base = binding.currencyListSpinner.selectedItem.toString()
+        getCurrenciesFromApi(base)
+        with(binding) {
+            if (currencyViewModel.connectionError.value?.isNotEmpty() == true) {
+                mainFragmentContainer.visibility = View.INVISIBLE
+                refreshConnectionButton.visibility = View.VISIBLE
+                checkInternetConnectionText.visibility = View.VISIBLE
+                setupDataLoading()
+            } else {
+                checkInternetConnectionText.visibility = View.INVISIBLE
+                mainFragmentContainer.visibility = View.VISIBLE
+                refreshConnectionButton.visibility = View.INVISIBLE
+                refreshConnectionButton.setOnClickListener {
+                    if (currencyViewModel.isHasInternetConnection()) {
+                        lifecycleScope.launch(Dispatchers.Main) {
+                            currencyViewModel.connectionError.value = null
+                            mainFragmentContainer.visibility = View.VISIBLE
+                            refreshConnectionButton.visibility = View.INVISIBLE
+                            checkInternetConnectionText.visibility = View.INVISIBLE
+                            setupDataLoading()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupDataLoading() {
+        val base = binding.currencyListSpinner.selectedItem.toString()
+        getCurrenciesFromApi(base)
+        initRecyclerView()
+        setupCurrencyItemSelectedListener()
+        setDataToRecyclerView()
+    }
+
+    private fun getCurrenciesFromApi(base: String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            currencyViewModel.getRatesFromApi(base)
+        }
+
+    }
+
     private fun setDataToRecyclerView() {
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             currencyViewModel.currencies.collect { data ->
                 currencyAdapter?.submitList(data)
             }
@@ -112,6 +147,13 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
                 CurrencyListFragmentDirections.actionCurrencyListFragmentToFilterBottomSheetFragment()
             view?.findNavController()?.navigate(action)
         }
+    }
+
+    private fun initFiltersByCurrencyNameAndRate() {
+        filterListByNameAscending()
+        filterListByNameDescending()
+        filterListByRateAscending()
+        filterListByRateDescending()
     }
 
 
@@ -162,6 +204,4 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
             }
         }
     }
-
-
 }

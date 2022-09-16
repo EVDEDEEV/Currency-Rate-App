@@ -1,99 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/light_gray2"
-    tools:context=".presentation.fragments.currencyFragment.CurrencyListFragment">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline08"
+    <TextView
+        android:visibility="invisible"
+        android:gravity="center"
+        android:id="@+id/checkInternetConnectionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".04" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline92"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".96" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView"
-        style="@style/CustomCardViewStyle"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="20dp"
-        android:clipToPadding="false"
-        app:cardBackgroundColor="#ECF3FF"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp"
-        app:contentPadding="4dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline92"
-        app:layout_constraintStart_toStartOf="@id/guideline08"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/gold"
-        app:strokeWidth="1dp">
-        <!--        #0F87FF-->
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:background="@drawable/round_corner"
-                android:id="@+id/filterButton"
-                android:src="@drawable/sort_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/selectCurrencyText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/aldrich"
-                android:text="@string/select_currency"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/currencyListSpinner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/currencyListSpinner"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="16dp"
-                android:dropDownWidth="300dp"
-                android:dropDownVerticalOffset="50dp"
-                android:entries="@array/currency_codes"
-                android:popupBackground="@color/light_gray2"
-                android:spinnerMode="dropdown"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCurrency"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        android:visibility="visible"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:text="Check internet connection"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline92"
-        app:layout_constraintStart_toEndOf="@+id/guideline08"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:listitem="@layout/currency_item" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="invisible"
+        android:id="@+id/refreshConnectionButton"
+        android:layout_marginTop="18dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Refresh"
+        app:layout_constraintTop_toBottomOf="@id/checkInternetConnectionText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="visible"
+        android:id="@+id/mainFragmentContainer"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray2"
+        tools:context=".presentation.fragments.currencyFragment.CurrencyListFragment">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline08"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline92"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".96" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
+            style="@style/CustomCardViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="20dp"
+            android:clipToPadding="false"
+            app:cardBackgroundColor="#ECF3FF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:contentPadding="4dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline92"
+            app:layout_constraintStart_toStartOf="@id/guideline08"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/cardview_shadow_end_color"
+            app:strokeWidth="1dp">
+            <!--        #0F87FF-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/filterButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/round_corner"
+                    android:src="@drawable/sort_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/selectCurrencyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/aldrich"
+                    android:text="@string/select_currency"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@id/currencyListSpinner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/currencyListSpinner"
+                    android:layout_width="235dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:dropDownWidth="300dp"
+                    android:dropDownVerticalOffset="50dp"
+                    android:entries="@array/currency_codes"
+                    android:popupBackground="@color/light_gray2"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCurrency"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline92"
+            app:layout_constraintStart_toEndOf="@+id/guideline08"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            tools:listitem="@layout/currency_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

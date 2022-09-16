@@ -1,10 +1,13 @@
 package my.project.currenciestestapp.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import my.project.currenciestestapp.Constants.BASE_URL
+import my.project.currenciestestapp.CurrencyApplication
 import my.project.currenciestestapp.data.api.CurrencyApi
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesDao
@@ -19,6 +22,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+
+    @Singleton
+    @Provides
+    fun provideApplication(@ApplicationContext app: Context): CurrencyApplication {
+        return app as CurrencyApplication
+    }
 
     @Singleton
     @Provides
@@ -44,6 +54,11 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideCurrencyRepository(currencyDao: CurrencyDao, favoritesDao: FavoritesDao, currencyApi: CurrencyApi) =
-        CurrencyListRepository(currencyDao,currencyApi, favoritesDao)
+    fun provideCurrencyRepository(
+        currencyDao: CurrencyDao,
+        favoritesDao: FavoritesDao,
+        currencyApi: CurrencyApi,
+        application: CurrencyApplication
+    ) =
+        CurrencyListRepository(currencyDao, currencyApi, favoritesDao, application)
 }
