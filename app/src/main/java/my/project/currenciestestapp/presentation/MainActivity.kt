@@ -18,16 +18,21 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val binding by viewBinding(ActivityMainBinding::bind)
-    private lateinit var navController: NavController
+    private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         navController = findNavController(R.id.navHostFragment)
-        binding.bottomNavigationView.setupWithNavController(navController)
-        }
+        binding.bottomNavigationView.setupWithNavController(navController!!)
+    }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return navController?.navigateUp() ?: super.onSupportNavigateUp()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navController = null
     }
 }

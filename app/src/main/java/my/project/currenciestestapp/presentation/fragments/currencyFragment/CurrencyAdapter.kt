@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
 import my.project.currenciestestapp.databinding.CurrencyItemBinding
 
-class CurrencyAdapter(private val addToFavorites: (CurrencyEntity) -> Unit) :
-    ListAdapter<CurrencyEntity, CurrencyAdapter.CurrencyViewHolder>(DIFF_CALLBACK) {
-
+class CurrencyAdapter(
+    private val addToFavorites: (CurrencyEntity) -> Unit,
+) : ListAdapter<CurrencyEntity, CurrencyAdapter.CurrencyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
         val binding = CurrencyItemBinding
@@ -47,14 +47,12 @@ class CurrencyAdapter(private val addToFavorites: (CurrencyEntity) -> Unit) :
             override fun areItemsTheSame(
                 oldItem: CurrencyEntity,
                 newItem: CurrencyEntity,
-            ): Boolean =
-                oldItem.currencyName == newItem.currencyName
+            ): Boolean = oldItem.currencyName == newItem.currencyName
 
             override fun areContentsTheSame(
                 oldItem: CurrencyEntity,
                 newItem: CurrencyEntity,
-            ): Boolean =
-                oldItem == newItem
+            ): Boolean = oldItem == newItem
         }
     }
 

@@ -15,14 +15,14 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import my.project.currenciestestapp.Constants.NAME_ASC
-import my.project.currenciestestapp.Constants.NAME_DESC
-import my.project.currenciestestapp.Constants.RATE_ASC
-import my.project.currenciestestapp.Constants.RATE_DESC
-import my.project.currenciestestapp.Constants.REQUEST_KEY1
-import my.project.currenciestestapp.Constants.REQUEST_KEY2
-import my.project.currenciestestapp.Constants.REQUEST_KEY3
-import my.project.currenciestestapp.Constants.REQUEST_KEY4
+import my.project.currenciestestapp.Constants.NAME_ASC_ARG
+import my.project.currenciestestapp.Constants.NAME_DESC_ARG
+import my.project.currenciestestapp.Constants.RATE_ASC_ARG
+import my.project.currenciestestapp.Constants.RATE_DESC_ARG
+import my.project.currenciestestapp.Constants.REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_ASC
+import my.project.currenciestestapp.Constants.REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_DESC
+import my.project.currenciestestapp.Constants.REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_ASC
+import my.project.currenciestestapp.Constants.REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_DESC
 import my.project.currenciestestapp.R
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
 import my.project.currenciestestapp.databinding.FragmentCurrencyListBinding
@@ -34,8 +34,9 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     private val favoritesViewModel: FavoritesViewModel by viewModels()
     private val currencyViewModel: CurrencyListViewModel by viewModels()
     private val binding by viewBinding(FragmentCurrencyListBinding::bind)
-    private var currencyAdapter: CurrencyAdapter? = null
-
+    private var currencyAdapter = CurrencyAdapter { currencyEntity: CurrencyEntity ->
+        addToFavorites(currencyEntity)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,29 +49,26 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     }
 
     private fun setupCurrencyItemSelectedListener() {
-        with(binding) {
-            currencyListSpinner.onItemSelectedListener =
-                object : AdapterView.OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>,
-                        view: View?,
-                        pos: Int,
-                        id: Long,
-                    ) {
-                        if (pos >= 0) {
-                            checkInternetConnectionAndRefreshData()
-                        }
+        binding.currencyListSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    pos: Int,
+                    id: Long,
+                ) {
+                    if (pos >= 0) {
+                        checkInternetConnectionAndRefreshData()
                     }
-
-                    override fun onNothingSelected(parent: AdapterView<*>?) {}
                 }
-        }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
     }
 
-
     fun checkInternetConnectionAndRefreshData() {
-        val base = binding.currencyListSpinner.selectedItem.toString()
-        getCurrenciesFromApi(base)
+        val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
+        getCurrenciesFromApi(baseCurrency)
         with(binding) {
             if (currencyViewModel.connectionError.value?.isNotEmpty() == true) {
                 mainFragmentContainer.visibility = View.INVISIBLE
@@ -97,16 +95,16 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     }
 
     private fun setupDataLoading() {
-        val base = binding.currencyListSpinner.selectedItem.toString()
-        getCurrenciesFromApi(base)
+        val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
+        getCurrenciesFromApi(baseCurrency)
         initRecyclerView()
         setupCurrencyItemSelectedListener()
         setDataToRecyclerView()
     }
 
-    private fun getCurrenciesFromApi(base: String) {
+    private fun getCurrenciesFromApi(baseCurrency: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            currencyViewModel.getRatesFromApi(base)
+            currencyViewModel.getRatesFromApi(baseCurrency)
         }
 
     }
@@ -114,19 +112,13 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     private fun setDataToRecyclerView() {
         lifecycleScope.launch(Dispatchers.IO) {
             currencyViewModel.currencies.collect { data ->
-                currencyAdapter?.submitList(data)
+                currencyAdapter.submitList(data)
             }
         }
     }
 
-
     private fun initRecyclerView() {
         binding.recyclerViewCurrency.apply {
-            currencyAdapter = CurrencyAdapter { currencyEntity: CurrencyEntity ->
-                addToFavorites(
-                    currencyEntity
-                )
-            }
             adapter = currencyAdapter
             layoutManager = GridLayoutManager(
                 context, 2, GridLayoutManager.VERTICAL, false)
@@ -135,7 +127,7 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     }
 
     private fun addToFavorites(currencyEntity: CurrencyEntity) {
-        favoritesViewModel.addToFavor(
+        favoritesViewModel.addToFavorites(
             currencyName = currencyEntity.currencyName,
             rate = currencyEntity.rate
         )
@@ -156,50 +148,49 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
         filterListByRateDescending()
     }
 
-
     private fun filterListByNameAscending() {
-        setFragmentResultListener(REQUEST_KEY1) { key, bundle ->
-            val result = bundle.getString(NAME_ASC)
+        setFragmentResultListener(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_ASC) { key, bundle ->
+            val result = bundle.getString(NAME_ASC_ARG)
             val sortedCurrency = currencyViewModel.getFilteredList(result)
             lifecycleScope.launch(Dispatchers.IO) {
                 sortedCurrency.collect {
-                    currencyAdapter?.submitList(it)
+                    currencyAdapter.submitList(it)
                 }
             }
         }
     }
 
     private fun filterListByNameDescending() {
-        setFragmentResultListener(REQUEST_KEY2) { key, bundle ->
-            val result = bundle.getString(NAME_DESC)
+        setFragmentResultListener(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_DESC) { key, bundle ->
+            val result = bundle.getString(NAME_DESC_ARG)
             val sortedCurrency = currencyViewModel.getFilteredList(result)
             lifecycleScope.launch(Dispatchers.IO) {
                 sortedCurrency.collect {
-                    currencyAdapter?.submitList(it)
+                    currencyAdapter.submitList(it)
                 }
             }
         }
     }
 
     private fun filterListByRateAscending() {
-        setFragmentResultListener(REQUEST_KEY3) { key, bundle ->
-            val result = bundle.getString(RATE_ASC)
+        setFragmentResultListener(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_ASC) { key, bundle ->
+            val result = bundle.getString(RATE_ASC_ARG)
             val sortedCurrency = currencyViewModel.getFilteredList(result)
             lifecycleScope.launch(Dispatchers.IO) {
                 sortedCurrency.collect {
-                    currencyAdapter?.submitList(it)
+                    currencyAdapter.submitList(it)
                 }
             }
         }
     }
 
     private fun filterListByRateDescending() {
-        setFragmentResultListener(REQUEST_KEY4) { key, bundle ->
-            val result = bundle.getString(RATE_DESC)
+        setFragmentResultListener(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_DESC) { key, bundle ->
+            val result = bundle.getString(RATE_DESC_ARG)
             val sortedCurrency = currencyViewModel.getFilteredList(result)
             lifecycleScope.launch(Dispatchers.IO) {
                 sortedCurrency.collect {
-                    currencyAdapter?.submitList(it)
+                    currencyAdapter.submitList(it)
                 }
             }
         }

@@ -43,7 +43,6 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
             favoritesAdapter = FavoritesAdapter { favoritesEntity: FavoritesEntity ->
                 deleteItemFromFavorites(favoritesEntity)
             }
-
             adapter = favoritesAdapter
             layoutManager = LinearLayoutManager(
                 context, LinearLayoutManager.VERTICAL, false)
@@ -61,18 +60,3 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

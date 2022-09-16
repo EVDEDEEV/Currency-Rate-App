@@ -13,12 +13,12 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
     private val currencyRepository: CurrencyListRepository,
-    private val favoritesRepository: FavoriteListRepository
+    private val favoritesRepository: FavoriteListRepository,
 ) : ViewModel() {
 
     val favorites: Flow<List<FavoritesEntity>> = favoritesRepository.getAllFavorites()
 
-    fun addToFavor(currencyName: String, rate: Double) {
+    fun addToFavorites(currencyName: String, rate: Double) {
         insertInFavoritesEntity(
             FavoritesEntity(
                 favoritesCurrencyName = currencyName,

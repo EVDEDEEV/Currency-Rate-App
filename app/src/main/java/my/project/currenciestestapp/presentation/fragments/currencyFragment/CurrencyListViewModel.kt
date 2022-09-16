@@ -13,6 +13,7 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import my.project.currenciestestapp.Constants.INTERNET_CONNECTION_ERROR
 import my.project.currenciestestapp.CurrencyApplication
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
 import my.project.currenciestestapp.data.repository.CurrencyListRepository
@@ -23,7 +24,6 @@ class CurrencyListViewModel @Inject constructor(
     private val repository: CurrencyListRepository,
     private val application: CurrencyApplication,
 ) : ViewModel() {
-
 
     var connectionError = MutableLiveData<String>()
 
@@ -39,10 +39,10 @@ class CurrencyListViewModel @Inject constructor(
 
     fun getFilteredList(sortFilter: String?): Flow<List<CurrencyEntity>> {
         return when (sortFilter) {
-            "name_asc" -> sortedCurrencyListByNameASC
-            "name_desc" -> sortedCurrencyListByNameDESC
-            "rate_asc" -> sortedCurrencyListByRateASC
-            "rate_desc" -> sortedCurrencyListByRateDESC
+            FilterArgs.FILTER_BY_NAME_ASC.sortFilter -> sortedCurrencyListByNameASC
+            FilterArgs.FILTER_BY_NAME_DESC.sortFilter -> sortedCurrencyListByNameDESC
+            FilterArgs.FILTER_BY_RATE_ASC.sortFilter -> sortedCurrencyListByRateASC
+            FilterArgs.FILTER_BY_RATE_DESC.sortFilter -> sortedCurrencyListByRateDESC
             else -> currencies
         }
     }
@@ -54,7 +54,7 @@ class CurrencyListViewModel @Inject constructor(
             } catch (ce: CancellationException) {
                 throw ce
             } catch (e: Exception) {
-                connectionError.postValue("internet connection error")
+                connectionError.postValue(INTERNET_CONNECTION_ERROR)
             }
         }
     }
@@ -86,5 +86,12 @@ class CurrencyListViewModel @Inject constructor(
 
         }
         return false
+    }
+
+    enum class FilterArgs(val sortFilter: String) {
+        FILTER_BY_NAME_ASC("name_asc"),
+        FILTER_BY_NAME_DESC("name_desc"),
+        FILTER_BY_RATE_ASC("rate_asc"),
+        FILTER_BY_RATE_DESC("rate_desc"),
     }
 }

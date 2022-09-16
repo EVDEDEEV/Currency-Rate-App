@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/aldrich"
-            android:text="Filter by currency name "
+            android:text="@string/filter_by_currency_name"
             android:textSize="15sp"
             android:textStyle="bold"/>
 
@@ -46,9 +46,9 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:backgroundTint="#EDE7F6"
+            android:backgroundTint="@color/filter_buttons_color"
             android:fontFamily="@font/aldrich"
-            android:text="Sort ascending [A-Z]"
+            android:text="@string/sort_ascending_by_currency_name"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +63,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:fontFamily="@font/aldrich"
-            android:text="Sort descending [Z-A]"
-            android:backgroundTint="#EDE7F6"
+            android:text="@string/sort_descending_by_currency_name"
+            android:backgroundTint="@color/filter_buttons_color"
             android:textSize="15sp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,7 +90,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ascendingRate"
-            android:text="Filter by currency rate value"
+            android:text="@string/filter_by_currency_rate_value"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -101,29 +101,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_rate_filter"
             android:layout_height="60dp"
-            android:backgroundTint="#EDE7F6"
+            android:backgroundTint="@color/filter_buttons_color"
             android:fontFamily="@font/aldrich"
-            android:text="Sort ascending [123]"
+            android:text="@string/sort_rate_ascending"
             android:textSize="15sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/descendingRate"
             android:layout_width="250dp"
             android:layout_height="60dp"
-            android:backgroundTint="#EDE7F6"
+            android:backgroundTint="@color/filter_buttons_color"
             android:fontFamily="@font/aldrich"
-            android:text="Sort descending [321]"
+            android:text="@string/sort_rate_descending"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ascendingRate"/>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

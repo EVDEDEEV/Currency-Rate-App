@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:visibility="invisible"
-        android:gravity="center"
         android:id="@+id/checkInternetConnectionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check internet connection"
+        android:gravity="center"
+        android:text="@string/check_internet_connection"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,40 +20,38 @@
     </TextView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:visibility="invisible"
         android:id="@+id/refreshConnectionButton"
-        android:layout_marginTop="18dp"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:text="Refresh"
-        app:layout_constraintTop_toBottomOf="@id/checkInternetConnectionText"
+        android:layout_marginTop="18dp"
+        android:text="@string/refresh"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/checkInternetConnectionText">
     </androidx.appcompat.widget.AppCompatButton>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="visible"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/mainFragmentContainer"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_gray2"
+        android:visibility="visible"
         tools:context=".presentation.fragments.currencyFragment.CurrencyListFragment">
 
-
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline08"
+            android:id="@+id/leftGuideline08"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".04" />
+            app:layout_constraintGuide_percent=".04"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline92"
+            android:id="@+id/rightGuideline92"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".96" />
+            app:layout_constraintGuide_percent=".96"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView"
@@ -61,16 +60,15 @@
             android:layout_height="120dp"
             android:layout_marginTop="20dp"
             android:clipToPadding="false"
-            app:cardBackgroundColor="#ECF3FF"
+            app:cardBackgroundColor="@color/light_gray2"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
             app:contentPadding="4dp"
-            app:layout_constraintEnd_toEndOf="@id/guideline92"
-            app:layout_constraintStart_toStartOf="@id/guideline08"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline92"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline08"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/cardview_shadow_end_color"
             app:strokeWidth="1dp">
-            <!--        #0F87FF-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -85,7 +83,7 @@
                     android:src="@drawable/sort_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/selectCurrencyText"
@@ -97,7 +95,7 @@
                     android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@id/currencyListSpinner"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <Spinner
                     android:id="@+id/currencyListSpinner"
@@ -111,7 +109,7 @@
                     android:popupBackground="@color/light_gray2"
                     android:spinnerMode="dropdown"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -124,10 +122,10 @@
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline92"
-            app:layout_constraintStart_toEndOf="@+id/guideline08"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuideline92"
+            app:layout_constraintStart_toEndOf="@+id/leftGuideline08"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
-            tools:listitem="@layout/currency_item" />
-
+            tools:listitem="@layout/currency_item"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

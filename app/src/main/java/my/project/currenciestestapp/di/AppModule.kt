@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import my.project.currenciestestapp.Constants.BASE_URL
+import my.project.currenciestestapp.Constants.BASE_CURRENCY_URL
 import my.project.currenciestestapp.CurrencyApplication
 import my.project.currenciestestapp.data.api.CurrencyApi
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
@@ -22,7 +22,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
 
     @Singleton
     @Provides
@@ -44,8 +43,9 @@ object AppModule {
             .writeTimeout(120, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .build()
+
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_CURRENCY_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -57,7 +57,5 @@ object AppModule {
         currencyDao: CurrencyDao,
         favoritesDao: FavoritesDao,
         currencyApi: CurrencyApi,
-        application: CurrencyApplication
-    ) =
-        CurrencyListRepository(currencyDao, currencyApi, favoritesDao, application)
+    ) = CurrencyListRepository(currencyDao, currencyApi, favoritesDao)
 }

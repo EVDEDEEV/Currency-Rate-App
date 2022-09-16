@@ -17,7 +17,6 @@ class CurrencyListRepository @Inject constructor(
     private val currencyDao: CurrencyDao,
     private val currencyApi: CurrencyApi,
     private val favoritesDao: FavoritesDao,
-    private val application: CurrencyApplication
 ) {
 
     suspend fun getRatesFromApi(base: String) {

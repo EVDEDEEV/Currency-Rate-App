@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import my.project.currenciestestapp.Constants.RATES_VALUES_FORMAT
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesEntity
 import my.project.currenciestestapp.databinding.FavoritesItemBinding
 
@@ -35,7 +36,7 @@ class FavoritesAdapter(private val deleteItemFromFavorites: (FavoritesEntity) ->
             val rateDoubleValue = favoritesEntity.favoriteRate
             with(binding) {
                 favoriteCurrencyName.text = favoritesEntity.favoritesCurrencyName
-                favoriteCurrencyRate.text = String.format("%.2f", rateDoubleValue)
+                favoriteCurrencyRate.text = String.format(RATES_VALUES_FORMAT, rateDoubleValue)
                 removeFromFavorites.setOnClickListener {
                     deleteItemFromFavorites(favoritesEntity)
                 }
@@ -48,14 +49,12 @@ class FavoritesAdapter(private val deleteItemFromFavorites: (FavoritesEntity) ->
             override fun areItemsTheSame(
                 oldItem: FavoritesEntity,
                 newItem: FavoritesEntity,
-            ): Boolean =
-                oldItem.favoritesCurrencyName == newItem.favoritesCurrencyName
+            ): Boolean = oldItem.favoritesCurrencyName == newItem.favoritesCurrencyName
 
             override fun areContentsTheSame(
                 oldItem: FavoritesEntity,
                 newItem: FavoritesEntity,
-            ): Boolean =
-                oldItem == newItem
+            ): Boolean = oldItem == newItem
         }
     }
 }
