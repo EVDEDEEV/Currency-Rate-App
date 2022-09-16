@@ -15,7 +15,6 @@ import my.project.currenciestestapp.Constants.REQUEST_KEY1
 import my.project.currenciestestapp.Constants.REQUEST_KEY2
 import my.project.currenciestestapp.Constants.REQUEST_KEY3
 import my.project.currenciestestapp.Constants.REQUEST_KEY4
-import my.project.currenciestestapp.R
 import my.project.currenciestestapp.databinding.FragmentFilterBottomSheetBinding
 
 class FilterBottomSheetFragment : BottomSheetDialogFragment() {

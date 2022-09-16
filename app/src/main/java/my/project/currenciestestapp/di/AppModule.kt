@@ -43,7 +43,6 @@ object AppModule {
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
-//            .addInterceptor(ApiKeyInterceptor())
             .build()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
