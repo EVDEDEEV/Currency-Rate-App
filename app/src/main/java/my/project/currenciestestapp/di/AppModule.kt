@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import my.project.currenciestestapp.data.api.ApiKeyInterceptor
+import my.project.currenciestestapp.Constants.BASE_URL
 import my.project.currenciestestapp.data.api.CurrencyApi
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesDao
@@ -15,7 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-private const val BASE_URL = "https://api.apilayer.com/exchangerates_data/"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -30,10 +29,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
-        val client = OkHttpClient.Builder().addInterceptor(ApiKeyInterceptor())
+        val client = OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS).build()
+            .readTimeout(60, TimeUnit.SECONDS)
+//            .addInterceptor(ApiKeyInterceptor())
+            .build()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)

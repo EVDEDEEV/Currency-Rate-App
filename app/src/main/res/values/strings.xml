@@ -34,13 +34,13 @@
         <item>BTN</item>
         <item>BWP</item>
         <item>BYN</item>
-        <item>BYR</item>
         <item>BZD</item>
         <item>CAD</item>
         <item>CDF</item>
         <item>CHF</item>
         <item>CLF</item>
         <item>CLP</item>
+        <item>CNH</item>
         <item>CNY</item>
         <item>COP</item>
         <item>CRC</item>
@@ -97,8 +97,6 @@
         <item>LKR</item>
         <item>LRD</item>
         <item>LSL</item>
-        <item>LTL</item>
-        <item>LVL</item>
         <item>LYD</item>
         <item>MAD</item>
         <item>MDL</item>
@@ -107,7 +105,7 @@
         <item>MMK</item>
         <item>MNT</item>
         <item>MOP</item>
-        <item>MRO</item>
+        <item>MRU</item>
         <item>MUR</item>
         <item>MVR</item>
         <item>MWK</item>
@@ -143,7 +141,9 @@
         <item>SLL</item>
         <item>SOS</item>
         <item>SRD</item>
+        <item>SSP</item>
         <item>STD</item>
+        <item>STN</item>
         <item>SVC</item>
         <item>SYP</item>
         <item>SZL</item>
@@ -161,6 +161,7 @@
         <item>USD</item>
         <item>UYU</item>
         <item>UZS</item>
+        <item>VES</item>
         <item>VND</item>
         <item>VUV</item>
         <item>WST</item>
@@ -170,10 +171,11 @@
         <item>XCD</item>
         <item>XDR</item>
         <item>XOF</item>
+        <item>XPD</item>
         <item>XPF</item>
+        <item>XPT</item>
         <item>YER</item>
         <item>ZAR</item>
-        <item>ZMK</item>
         <item>ZMW</item>
         <item>ZWL</item>
 

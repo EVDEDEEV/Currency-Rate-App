@@ -28,7 +28,7 @@ class FavoritesViewModel @Inject constructor(
     }
 
     private fun insertInFavoritesEntity(favoritesEntity: FavoritesEntity) = viewModelScope.launch {
-        currencyRepository.insert(favoritesEntity)
+        currencyRepository.insertItemInFavoritesList(favoritesEntity)
     }
 
     fun removeFromFavorites(favoriteName: String) = viewModelScope.launch {

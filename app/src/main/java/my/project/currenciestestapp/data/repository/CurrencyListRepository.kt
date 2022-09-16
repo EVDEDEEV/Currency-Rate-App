@@ -25,7 +25,7 @@ class CurrencyListRepository @Inject constructor(
         currencyDao.insertAll(currencyEntity)
     }
 
-    suspend fun insert(favoritesEntity: FavoritesEntity) {
+    suspend fun insertItemInFavoritesList(favoritesEntity: FavoritesEntity) {
         favoritesDao.addToFavorites(favoritesEntity)
     }
 
@@ -43,6 +43,4 @@ class CurrencyListRepository @Inject constructor(
 
     fun getSortFilterByRateDESC(): Flow<List<CurrencyEntity>> =
         currencyDao.getSortedDescendingCurrencyListByRate()
-
-
 }

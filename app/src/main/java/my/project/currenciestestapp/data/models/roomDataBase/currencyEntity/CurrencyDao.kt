@@ -7,22 +7,19 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CurrencyDao {
 
-    @Query("SELECT * FROM currencyTable")
+    @Query("SELECT * FROM currency_table")
     fun getAllCurrency(): Flow<List<CurrencyEntity>>
 
-//    @Query("SELECT * FROM currencyTable ORDER BY currency_name DESC")
-//    fun getAllCurrency(): Flow<List<CurrencyEntity>>
-
-    @Query("SELECT * FROM currencyTable ORDER BY currency_name ASC")
+    @Query("SELECT * FROM currency_table ORDER BY currency_name ASC")
      fun getSortedAscendingCurrencyListByName(): Flow<List<CurrencyEntity>>
 
-    @Query("SELECT * FROM currencyTable ORDER BY currency_name DESC")
+    @Query("SELECT * FROM currency_table ORDER BY currency_name DESC")
      fun getSortedDescendingCurrencyListByName(): Flow<List<CurrencyEntity>>
 
-    @Query("SELECT * FROM currencyTable ORDER BY rate ASC")
+    @Query("SELECT * FROM currency_table ORDER BY rate ASC")
      fun getSortedAscendingCurrencyListByRate(): Flow<List<CurrencyEntity>>
 
-    @Query("SELECT * FROM currencyTable ORDER BY rate DESC")
+    @Query("SELECT * FROM currency_table ORDER BY rate DESC")
      fun getSortedDescendingCurrencyListByRate(): Flow<List<CurrencyEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

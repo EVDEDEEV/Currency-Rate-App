@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import my.project.currenciestestapp.Constants.NAME_ASC
 import my.project.currenciestestapp.Constants.NAME_DESC
 import my.project.currenciestestapp.Constants.RATE_ASC
 import my.project.currenciestestapp.Constants.RATE_DESC
-import my.project.currenciestestapp.Constants.REQUEST_KEY
+import my.project.currenciestestapp.Constants.REQUEST_KEY1
+import my.project.currenciestestapp.Constants.REQUEST_KEY2
+import my.project.currenciestestapp.Constants.REQUEST_KEY3
+import my.project.currenciestestapp.Constants.REQUEST_KEY4
+import my.project.currenciestestapp.R
 import my.project.currenciestestapp.databinding.FragmentFilterBottomSheetBinding
 
 class FilterBottomSheetFragment : BottomSheetDialogFragment() {
@@ -38,32 +41,32 @@ class FilterBottomSheetFragment : BottomSheetDialogFragment() {
     private fun initFilterByNameAscending() {
         binding.ascendingName.setOnClickListener {
             val result = NAME_ASC
-            setFragmentResult(REQUEST_KEY, bundleOf(NAME_ASC to result))
-            activity?.onBackPressed()
+            setFragmentResult(REQUEST_KEY1, bundleOf(NAME_ASC to result))
+            dismiss()
         }
     }
 
     private fun initFilterByNameDescending() {
         binding.descendingName.setOnClickListener {
             val result = NAME_DESC
-            setFragmentResult(REQUEST_KEY, bundleOf(NAME_DESC to result))
-            activity?.onBackPressed()
+            setFragmentResult(REQUEST_KEY2, bundleOf(NAME_DESC to result))
+            dismiss()
         }
     }
 
     private fun initFilterByRateAscending() {
         binding.ascendingRate.setOnClickListener {
             val result = RATE_ASC
-            setFragmentResult(REQUEST_KEY, bundleOf(RATE_ASC to result))
-            activity?.onBackPressed()
+            setFragmentResult(REQUEST_KEY3, bundleOf(RATE_ASC to result))
+            dismiss()
         }
     }
 
     private fun initFilterByRateDescending() {
         binding.descendingRate.setOnClickListener {
             val result = RATE_DESC
-            setFragmentResult(REQUEST_KEY, bundleOf(RATE_DESC to result))
-            activity?.onBackPressed()
+            setFragmentResult(REQUEST_KEY4, bundleOf(RATE_DESC to result))
+            dismiss()
         }
     }
 }
