@@ -23,7 +23,6 @@ Just a simple Currency Rate Application with data from exchangerate.host API
 <li>BottomSheet Fragment with buttons for sort by currencies values</li>
 </ul> 
 <li>MVVM pattern</li> 
-<li>For navigation between fragments used androidx.navigation library</li>
 </ul>  
 
 
