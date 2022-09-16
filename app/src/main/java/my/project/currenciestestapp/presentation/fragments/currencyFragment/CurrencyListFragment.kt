@@ -40,8 +40,6 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-//        val base  = binding.currencyListSpinner.selectedItem.toString()
-//        getRatesFromApi(base)
         setDataToRecyclerView()
         filterListByNameAscending()
         filterListByNameDescending()
