@@ -28,9 +28,12 @@ Just a simple Currency Rate Application with data from exchangerate.host API
 
 
 <h3>Screenshots:</h3>
-![image](https://user-images.githubusercontent.com/94930087/190675548-fe153e97-6f98-4769-a13d-c0bd28a19ed9.png)
 
+![image](https://user-images.githubusercontent.com/94930087/190675548-fe153e97-6f98-4769-a13d-c0bd28a19ed9.png)
 ![image](https://user-images.githubusercontent.com/94930087/190675648-016e93c0-876c-44d5-8f10-eeec678a0ad2.png)
+
+
+
 ![image](https://user-images.githubusercontent.com/94930087/190675727-86caeb5f-5c83-4dcd-ae8b-cd059cab6b51.png)
 ![image](https://user-images.githubusercontent.com/94930087/190675802-7e417a36-064f-4159-bd62-16af6c17fa46.png)
 
