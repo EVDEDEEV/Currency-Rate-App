@@ -120,8 +120,6 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     private fun initRecyclerView() {
         binding.recyclerViewCurrency.apply {
             adapter = currencyAdapter
-            layoutManager = GridLayoutManager(
-                context, 2, GridLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.HORIZONTAL))
         }
     }

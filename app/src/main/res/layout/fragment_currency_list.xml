@@ -121,6 +121,7 @@
             android:scrollbars="vertical"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/rightGuideline92"
             app:layout_constraintStart_toEndOf="@+id/leftGuideline08"
