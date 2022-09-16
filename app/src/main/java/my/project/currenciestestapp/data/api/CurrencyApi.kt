@@ -13,5 +13,3 @@ interface CurrencyApi {
         @Query("base") base: String,
     ): Response<CurrencyResponse>
 }
-
-

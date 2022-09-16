@@ -55,5 +55,4 @@ class CurrencyAdapter(
             ): Boolean = oldItem == newItem
         }
     }
-
 }

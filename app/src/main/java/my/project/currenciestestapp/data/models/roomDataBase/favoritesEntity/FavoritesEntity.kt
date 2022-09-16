@@ -12,4 +12,3 @@ data class FavoritesEntity(
     @ColumnInfo(name = "favorite_rate")
     var favoriteRate: Double,
 )
-

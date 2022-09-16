@@ -8,15 +8,4 @@ data class CurrencyResponse(
     val base: String?,
     @SerializedName("rates")
     val rates: Map<String, Double>?,
-) 
-
-
-
-
-
-
-
-
-
-
-
+)

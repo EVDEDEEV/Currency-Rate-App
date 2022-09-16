@@ -14,5 +14,3 @@ object Constants {
     const val INTERNET_CONNECTION_ERROR = "internet connection error"
     const val RATES_VALUES_FORMAT = "%.2f"
 }
-
-
