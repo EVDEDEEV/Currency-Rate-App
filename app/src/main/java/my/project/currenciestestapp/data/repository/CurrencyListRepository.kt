@@ -29,5 +29,20 @@ class CurrencyListRepository @Inject constructor(
         favoritesDao.addToFavorites(favoritesEntity)
     }
 
-    fun getSavedExchangeRates(): Flow<List<CurrencyEntity>> = currencyDao.getAllCurrency()
+    fun getSavedExchangeRates(): Flow<List<CurrencyEntity>> =
+        currencyDao.getAllCurrency()
+
+    fun getSortFilterByNameASC(): Flow<List<CurrencyEntity>> =
+        currencyDao.getSortedAscendingCurrencyListByName()
+
+    fun getSortFilterByNameDESC(): Flow<List<CurrencyEntity>> =
+        currencyDao.getSortedDescendingCurrencyListByName()
+
+    fun getSortFilterByRateASC(): Flow<List<CurrencyEntity>> =
+        currencyDao.getSortedAscendingCurrencyListByRate()
+
+    fun getSortFilterByRateDESC(): Flow<List<CurrencyEntity>> =
+        currencyDao.getSortedDescendingCurrencyListByRate()
+
+
 }

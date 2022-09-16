@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesEntity
 import my.project.currenciestestapp.databinding.FavoritesItemBinding
 
-class FavoritesAdapter(private val deleteFromFavorites: (FavoritesEntity) -> Unit) :
+class FavoritesAdapter(private val deleteItemFromFavorites: (FavoritesEntity) -> Unit) :
     ListAdapter<FavoritesEntity, FavoritesAdapter.FavoritesViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
@@ -18,7 +18,7 @@ class FavoritesAdapter(private val deleteFromFavorites: (FavoritesEntity) -> Uni
     }
 
     override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
-        holder.bind(currentList[position], deleteFromFavorites)
+        holder.bind(currentList[position], deleteItemFromFavorites)
     }
 
     override fun getItemCount(): Int {
@@ -30,14 +30,15 @@ class FavoritesAdapter(private val deleteFromFavorites: (FavoritesEntity) -> Uni
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
             favoritesEntity: FavoritesEntity,
-            deleteFromFavorites: (FavoritesEntity) -> Unit,
+            deleteItemFromFavorites: (FavoritesEntity) -> Unit,
         ) {
             val rateDoubleValue = favoritesEntity.favoriteRate
-            binding.favoriteCurrencyName.text = favoritesEntity.favoritesCurrencyName
-//            binding.favoriteCurrencyRate.text = favoritesEntity.favoriteRate.toString()
-            binding.favoriteCurrencyRate.text = String.format("%.2f", rateDoubleValue)
-            binding.removeFromFavorites.setOnClickListener {
-                deleteFromFavorites(favoritesEntity)
+            with(binding) {
+                favoriteCurrencyName.text = favoritesEntity.favoritesCurrencyName
+                favoriteCurrencyRate.text = String.format("%.2f", rateDoubleValue)
+                removeFromFavorites.setOnClickListener {
+                    deleteItemFromFavorites(favoritesEntity)
+                }
             }
         }
     }

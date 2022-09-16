@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import my.project.currenciestestapp.Constants.RATE_ASC
+import my.project.currenciestestapp.Constants.REQUEST_KEY
 import my.project.currenciestestapp.R
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
 import my.project.currenciestestapp.databinding.FragmentCurrencyListBinding
@@ -25,20 +28,27 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     private val favoritesViewModel: FavoritesViewModel by viewModels()
     private val currencyViewModel: CurrencyListViewModel by viewModels()
     private val binding by viewBinding(FragmentCurrencyListBinding::bind)
-
     private var currencyAdapter: CurrencyAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        setDataToRecyclerView()
+//        setDataToRecyclerView()
         selectedCurrencyItemListener()
         initFilterButton()
+//        filterByNameAscending()
+        filterList()
     }
 
-    private fun filter() {
-        setFragmentResultListener("filterByName") { filterByName, bundle ->
-            val result = bundle.getBundle("bundleKey")
+    private fun filterList() {
+        setFragmentResultListener(REQUEST_KEY) { key, bundle ->
+            val result = bundle.getString(RATE_ASC)
+            val sortedCurrency = currencyViewModel.getFilteredList(result)
+            lifecycleScope.launch {
+                sortedCurrency.collect {
+                    currencyAdapter?.submitList(it)
+                }
+            }
         }
     }
 
@@ -47,29 +57,32 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     }
 
     private fun selectedCurrencyItemListener() {
-        binding.currencyListSpinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View?,
-                    pos: Int,
-                    id: Long,
-                ) {
-                    if (pos >= 1) {
-                        val baseCurrency =
-                            binding.currencyListSpinner.selectedItem.toString()
-                        getRatesFromApi(baseCurrency)
-                        setDataToRecyclerView()
-                        //Новый запрос при смене фрагментов
-                    } else {
-                        setDataToRecyclerView()
+        with(binding) {
+            currencyListSpinner.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View?,
+                        pos: Int,
+                        id: Long,
+                    ) {
+                        if (pos >= 1) {
+                            val baseCurrency =
+                                currencyListSpinner.selectedItem.toString()
+                            getRatesFromApi(baseCurrency)
+//                            setDataToRecyclerView()
+//                            filterList()
+                            //Новый запрос при смене фрагментов
+                        } else {
+//                            setDataToRecyclerView()
+//                            filterList()
+                        }
                     }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
                 }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
+        }
     }
-
 
     private fun setDataToRecyclerView() {
         lifecycleScope.launch {
@@ -78,6 +91,13 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
             }
         }
     }
+//    private fun setDataToRecyclerView() {
+//        lifecycleScope.launch {
+//            val rr = currencyViewModel.aaa()
+//            currencyAdapter?.submitList(rr)
+//        }
+//    }
+
 
     private fun initRecyclerView() {
         binding.recyclerViewCurrency.apply {
