@@ -5,7 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 data class CurrencyResponse(
     @SerializedName("base")
-    val base: String?,
+    val baseCurrency: String?,
     @SerializedName("rates")
-    val rates: Map<String, Double>?,
+    val currencyRates: Map<String, Double>?,
 )
+
+
+

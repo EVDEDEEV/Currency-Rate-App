@@ -30,6 +30,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/favoritesCurrencyDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="United States Dollar"/>
+
+        <TextView
             android:id="@+id/favoriteCurrencyRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

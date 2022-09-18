@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/currency_item"
-    android:layout_width="match_parent"
+    android:layout_width="365dp"
     android:layout_height="100dp"
     android:layout_margin="5dp"
     android:backgroundTint="@color/white"
@@ -14,6 +14,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/currencyDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="200dp"
+            android:height="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="2222222222">
+        </TextView>
+
 
         <TextView
             android:id="@+id/currencyName"
@@ -41,8 +53,9 @@
 
         <TextView
             android:id="@+id/currencyRate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:maxLines="1"
             android:layout_margin="10dp"
             android:fontFamily="@font/aldrich"
             android:text="@string/currencyRate"

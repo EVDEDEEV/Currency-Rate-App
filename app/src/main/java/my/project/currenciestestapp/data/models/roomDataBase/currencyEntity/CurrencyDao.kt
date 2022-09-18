@@ -23,7 +23,7 @@ interface CurrencyDao {
      fun getSortedDescendingCurrencyListByRate(): Flow<List<CurrencyEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(currencies: List<CurrencyEntity>)
+    suspend fun insertAll(currencies: List<CurrencyEntity?>)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateAllRate(rateList: List<CurrencyEntity>)

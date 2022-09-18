@@ -1,11 +1,6 @@
 package my.project.currenciestestapp.data.repository
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import kotlinx.coroutines.flow.Flow
-import my.project.currenciestestapp.CurrencyApplication
 import my.project.currenciestestapp.data.api.CurrencyApi
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyDao
 import my.project.currenciestestapp.data.models.roomDataBase.currencyEntity.CurrencyEntity
@@ -19,22 +14,40 @@ class CurrencyListRepository @Inject constructor(
     private val favoritesDao: FavoritesDao,
 ) {
 
-    suspend fun getRatesFromApi(base: String) {
-        val result = currencyApi.getCurrency(base).body()
-        val currencyEntity = result?.rates?.entries?.map { entry ->
+    suspend fun getRatesFromApi(baseCurrency: String, amount: String) {
+        val result = currencyApi.getCurrencyRates(baseCurrency, amount).body()
+        val result2 = currencyApi.getCurrencies().body()
+        val currencyEntity = result?.currencyRates?.entries?.map { entry ->
             CurrencyEntity(
                 currencyName = entry.key,
-                rate = entry.value
+                rate = entry.value,
             )
         }.orEmpty()
         currencyDao.insertAll(currencyEntity)
     }
 
+//    suspend fun getRatesFromApi(base: String) {
+//        val result = currencyApi.getCurrencyRates(base).body()
+//        val res2 = currencyApi.getCurrencies().body()
+//        val currencyEntity = result?.currencyRates?.entries?.map { entry ->
+//            res2?.symbols?.forEach { ent2->
+//                ent2.value
+//            }?.let {
+//                CurrencyEntity(
+//                    currencyName = entry.key,
+//                    rate = entry.value,
+//                    description = it
+//                )
+//            }
+//        }.orEmpty()
+//        currencyDao.insertAll(currencyEntity)
+//    }
+
     suspend fun insertItemInFavoritesList(favoritesEntity: FavoritesEntity) {
         favoritesDao.addToFavorites(favoritesEntity)
     }
 
-    fun getSavedExchangeRates(): Flow<List<CurrencyEntity>> =
+    fun getSavedCurrencyRates(): Flow<List<CurrencyEntity>> =
         currencyDao.getAllCurrency()
 
     fun getSortFilterByNameASC(): Flow<List<CurrencyEntity>> =
@@ -48,4 +61,5 @@ class CurrencyListRepository @Inject constructor(
 
     fun getSortFilterByRateDESC(): Flow<List<CurrencyEntity>> =
         currencyDao.getSortedDescendingCurrencyListByRate()
+
 }

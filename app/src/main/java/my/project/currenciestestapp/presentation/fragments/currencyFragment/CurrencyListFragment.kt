@@ -3,6 +3,7 @@ package my.project.currenciestestapp.presentation.fragments.currencyFragment
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import my.project.currenciestestapp.Constants.NAME_ASC_ARG
 import my.project.currenciestestapp.Constants.NAME_DESC_ARG
@@ -37,6 +39,8 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     private var currencyAdapter = CurrencyAdapter { currencyEntity: CurrencyEntity ->
         addToFavorites(currencyEntity)
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,20 +66,30 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
                     }
                 }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+//                    checkInternetConnectionAndRefreshData()
+                }
             }
     }
 
-    fun checkInternetConnectionAndRefreshData() {
-        val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
-        getCurrenciesFromApi(baseCurrency)
+     fun checkInternetConnectionAndRefreshData() {
+//         val amount = binding.amountTextInput.toString()
+//         val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
+//        getCurrenciesFromApi(baseCurrency, amount)
         with(binding) {
             if (currencyViewModel.connectionError.value?.isNotEmpty() == true) {
+                setupDataLoading()
+//                amountTextInput.text
                 mainFragmentContainer.visibility = View.INVISIBLE
                 refreshConnectionButton.visibility = View.VISIBLE
                 checkInternetConnectionText.visibility = View.VISIBLE
-                setupDataLoading()
+                    setupDataLoading()
+//                }
             } else {
+                setupDataLoading()
+                    amountTextInput.doAfterTextChanged {
+                        setupDataLoading()
+                    }
                 checkInternetConnectionText.visibility = View.INVISIBLE
                 mainFragmentContainer.visibility = View.VISIBLE
                 refreshConnectionButton.visibility = View.INVISIBLE
@@ -86,7 +100,6 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
                             mainFragmentContainer.visibility = View.VISIBLE
                             refreshConnectionButton.visibility = View.INVISIBLE
                             checkInternetConnectionText.visibility = View.INVISIBLE
-                            setupDataLoading()
                         }
                     }
                 }
@@ -95,16 +108,17 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     }
 
     private fun setupDataLoading() {
+        val amount = binding.amountTextInput.text.toString()
         val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
-        getCurrenciesFromApi(baseCurrency)
+        getCurrenciesFromApi(baseCurrency, amount)
         initRecyclerView()
         setupCurrencyItemSelectedListener()
         setDataToRecyclerView()
     }
 
-    private fun getCurrenciesFromApi(baseCurrency: String) {
+    private fun getCurrenciesFromApi(baseCurrency: String, amount: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            currencyViewModel.getRatesFromApi(baseCurrency)
+            currencyViewModel.getRatesFromApi(baseCurrency, amount)
         }
 
     }
@@ -127,7 +141,8 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     private fun addToFavorites(currencyEntity: CurrencyEntity) {
         favoritesViewModel.addToFavorites(
             currencyName = currencyEntity.currencyName,
-            rate = currencyEntity.rate
+            rate = currencyEntity.rate,
+//            description = currencyEntity.description
         )
     }
 

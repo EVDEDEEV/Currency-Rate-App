@@ -27,7 +27,7 @@ class CurrencyListViewModel @Inject constructor(
 
     var connectionError = MutableLiveData<String>()
 
-    var currencies: Flow<List<CurrencyEntity>> = repository.getSavedExchangeRates()
+    var currencies: Flow<List<CurrencyEntity>> = repository.getSavedCurrencyRates()
     private val sortedCurrencyListByNameASC: Flow<List<CurrencyEntity>> =
         repository.getSortFilterByNameASC()
     private val sortedCurrencyListByNameDESC: Flow<List<CurrencyEntity>> =
@@ -47,10 +47,10 @@ class CurrencyListViewModel @Inject constructor(
         }
     }
 
-    fun getRatesFromApi(base: String) {
+    fun getRatesFromApi(base: String, amount: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repository.getRatesFromApi(base)
+                repository.getRatesFromApi(base, amount)
             } catch (ce: CancellationException) {
                 throw ce
             } catch (e: Exception) {

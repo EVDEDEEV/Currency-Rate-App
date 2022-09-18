@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -44,14 +43,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".04"/>
+            app:layout_constraintGuide_percent=".04" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/rightGuideline92"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".96"/>
+            app:layout_constraintGuide_percent=".96" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView"
@@ -74,6 +73,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amountTextInput"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="50dp"
+                    android:hint="Enter amount"
+                    android:gravity="end|center"
+                    android:inputType="numberDecimal"
+                    android:text="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageButton
                     android:id="@+id/filterButton"
                     android:layout_width="40dp"
@@ -83,7 +94,7 @@
                     android:src="@drawable/sort_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/selectCurrencyText"
@@ -95,7 +106,7 @@
                     android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@id/currencyListSpinner"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
                     android:id="@+id/currencyListSpinner"
@@ -109,7 +120,7 @@
                     android:popupBackground="@color/light_gray2"
                     android:spinnerMode="dropdown"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -120,13 +131,12 @@
             android:layout_height="0dp"
             android:scrollbars="vertical"
             android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/rightGuideline92"
             app:layout_constraintStart_toEndOf="@+id/leftGuideline08"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
-            tools:listitem="@layout/currency_item"/>
+            tools:listitem="@layout/currency_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

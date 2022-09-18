@@ -37,6 +37,7 @@ class FavoritesAdapter(private val deleteItemFromFavorites: (FavoritesEntity) ->
             with(binding) {
                 favoriteCurrencyName.text = favoritesEntity.favoritesCurrencyName
                 favoriteCurrencyRate.text = String.format(RATES_VALUES_FORMAT, rateDoubleValue)
+//                favoritesCurrencyDescription.text = favoritesEntity.favoriteDescription
                 removeFromFavorites.setOnClickListener {
                     deleteItemFromFavorites(favoritesEntity)
                 }
