@@ -18,14 +18,13 @@ class FavoritesViewModel @Inject constructor(
 
     val favorites: Flow<List<FavoritesEntity>> = favoritesRepository.getAllFavorites()
 
-    fun addToFavorites(currencyName: String, rate: Double,
-//                       description: String
+    fun addToFavorites(currencyName: String, rate: Double, description: String
     ) {
         insertInFavoritesEntity(
             FavoritesEntity(
                 favoritesCurrencyName = currencyName,
                 favoriteRate = rate,
-//                favoriteDescription = description
+                favoriteDescription = description
             )
         )
     }

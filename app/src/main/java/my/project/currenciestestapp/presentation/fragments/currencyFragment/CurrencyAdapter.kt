@@ -37,7 +37,7 @@ class CurrencyAdapter(
             with(binding) {
                 currencyName.text = currencyEntity.currencyName
                 currencyRate.text = String.format("%.2f", rateDoubleValue)
-//                currencyDescription.text = currencyEntity.
+                currencyDescription.text = currencyEntity.description
                 binding.addToFavorites.setOnClickListener {
                     addToFavorites(currencyEntity)
                 }

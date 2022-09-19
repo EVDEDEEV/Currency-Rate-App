@@ -67,25 +67,18 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
                     }
                 }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-//                    checkInternetConnectionAndRefreshData()
-                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
     }
 
      fun checkInternetConnectionAndRefreshData() {
-//         val amount = binding.amountTextInput.toString()
-//         val baseCurrency = binding.currencyListSpinner.selectedItem.toString()
-//        getCurrenciesFromApi(baseCurrency, amount)
         with(binding) {
             if (currencyViewModel.connectionError.value?.isNotEmpty() == true) {
                 setupDataLoading()
-//                amountTextInput.text
                 mainFragmentContainer.visibility = View.INVISIBLE
                 refreshConnectionButton.visibility = View.VISIBLE
                 checkInternetConnectionText.visibility = View.VISIBLE
                     setupDataLoading()
-//                }
             } else {
                 setupDataLoading()
                     amountTextInput.doAfterTextChanged {
@@ -142,7 +135,7 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
         favoritesViewModel.addToFavorites(
             currencyName = currencyEntity.currencyName,
             rate = currencyEntity.rate,
-//            description = currencyEntity.description
+            description = currencyEntity.description
         )
     }
 
