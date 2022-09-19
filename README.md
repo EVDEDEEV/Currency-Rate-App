@@ -33,6 +33,7 @@ Just a simple Currency Rate Application with data from exchangerate.host API
  
 ![image](https://user-images.githubusercontent.com/94930087/190951474-d1718fca-622b-4a57-91d0-eeb3049f7f75.png)
 ![image](https://user-images.githubusercontent.com/94930087/190951422-bda66153-1cf0-458f-b300-cee8ba0929ac.png)
+
 ![image](https://user-images.githubusercontent.com/94930087/190951541-2aba4331-e38d-40f9-98fa-a04d90abf5f9.png)
 
 
