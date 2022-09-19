@@ -4,7 +4,7 @@ Just a simple Currency Rate Application with data from exchangerate.host API
 <h3>Used technologies:</h1>
   <ul>
   <li>Room</li>
-  <li>dependecny injection - Hilt</li>
+  <li>dependency injection - Hilt</li>
   <li>Coroutines</li>
   <li>Flow</li>
   <li>Jetpack Navigation Component</li>
@@ -28,12 +28,13 @@ Just a simple Currency Rate Application with data from exchangerate.host API
 
 <h3>Screenshots:</h3>
 
-![image](https://user-images.githubusercontent.com/94930087/190675548-fe153e97-6f98-4769-a13d-c0bd28a19ed9.png)
-![image](https://user-images.githubusercontent.com/94930087/190675648-016e93c0-876c-44d5-8f10-eeec678a0ad2.png)
+![image](https://user-images.githubusercontent.com/94930087/190951294-6c0c27da-4cdf-44bf-845f-16eff44f9e01.png)
+![image](https://user-images.githubusercontent.com/94930087/190951369-9bfd0d1a-8db6-479e-912b-3fc8da7ce642.png)
+ 
+![image](https://user-images.githubusercontent.com/94930087/190951474-d1718fca-622b-4a57-91d0-eeb3049f7f75.png)
+![image](https://user-images.githubusercontent.com/94930087/190951422-bda66153-1cf0-458f-b300-cee8ba0929ac.png)
+![image](https://user-images.githubusercontent.com/94930087/190951541-2aba4331-e38d-40f9-98fa-a04d90abf5f9.png)
 
 
-
-![image](https://user-images.githubusercontent.com/94930087/190675727-86caeb5f-5c83-4dcd-ae8b-cd059cab6b51.png)
-![image](https://user-images.githubusercontent.com/94930087/190675802-7e417a36-064f-4159-bd62-16af6c17fa46.png)
 
 
