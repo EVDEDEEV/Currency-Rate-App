@@ -16,6 +16,21 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/currencyDescription"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_margin="8dp"
+            android:fontFamily="@font/aldrich"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/currency_name">
+        </TextView>
+
+
+        <TextView
             android:id="@+id/currencyName"
             android:layout_width="70sp"
             android:layout_height="30dp"
@@ -34,15 +49,16 @@
             android:layout_height="3dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="15dp"
-            android:background="#EDE7F6"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginBottom="45dp"
+            android:background="@color/light_orange"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/currencyRate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:maxLength="20"
+            android:maxLines="1"
             android:layout_margin="10dp"
             android:fontFamily="@font/aldrich"
             android:text="@string/currencyRate"
@@ -55,13 +71,12 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/addToFavorites"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
             android:layout_margin="5dp"
             android:backgroundTint="@color/white"
             android:padding="10dp"
             android:src="@drawable/add_to_favorites_button_icon"
-            android:tooltipText="@string/usd"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/line" />

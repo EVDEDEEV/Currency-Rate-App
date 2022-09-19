@@ -12,7 +12,10 @@
         tools:layout="@layout/fragment_currency_list">
         <action
             android:id="@+id/action_currencyListFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment" />
+            app:destination="@id/favoritesFragment"
+            app:restoreState = "true"
+            app:popUpTo="@id/currencyListFragment"
+            app:popUpToSaveState = "true"/>
         <action
             android:id="@+id/action_currencyListFragment_to_filterBottomSheetFragment"
             app:destination="@id/filterBottomSheetFragment" />

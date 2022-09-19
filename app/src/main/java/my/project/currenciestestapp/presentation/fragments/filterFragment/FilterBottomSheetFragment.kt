@@ -37,39 +37,37 @@ class FilterBottomSheetFragment : BottomSheetDialogFragment() {
         initFilterByRateDescending()
     }
 
+    private fun pasteCodeForFragmentResultBoilerplate(requestKey: String, filterParam: String) {
+        setFragmentResult(requestKey,
+            bundleOf(filterParam to filterParam))
+        dismiss()
+    }
+
     private fun initFilterByNameAscending() {
         binding?.ascendingName?.setOnClickListener {
-            val result = NAME_ASC_ARG
-            setFragmentResult(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_ASC,
-                bundleOf(NAME_ASC_ARG to result))
-            dismiss()
+            pasteCodeForFragmentResultBoilerplate(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_ASC,
+                NAME_ASC_ARG)
         }
     }
 
     private fun initFilterByNameDescending() {
         binding?.descendingName?.setOnClickListener {
-            val result = NAME_DESC_ARG
-            setFragmentResult(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_DESC,
-                bundleOf(NAME_DESC_ARG to result))
-            dismiss()
+            pasteCodeForFragmentResultBoilerplate(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_DESC,
+                NAME_DESC_ARG)
         }
     }
 
     private fun initFilterByRateAscending() {
         binding?.ascendingRate?.setOnClickListener {
-            val result = RATE_ASC_ARG
-            setFragmentResult(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_ASC,
-                bundleOf(RATE_ASC_ARG to result))
-            dismiss()
+            pasteCodeForFragmentResultBoilerplate(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_ASC,
+                RATE_ASC_ARG)
         }
     }
 
     private fun initFilterByRateDescending() {
         binding?.descendingRate?.setOnClickListener {
-            val result = RATE_DESC_ARG
-            setFragmentResult(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_DESC,
-                bundleOf(RATE_DESC_ARG to result))
-            dismiss()
+            pasteCodeForFragmentResultBoilerplate(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_DESC,
+                RATE_DESC_ARG)
         }
     }
 

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class FavoriteListRepository @Inject constructor(
     private val favoritesDao: FavoritesDao) {
 
-    fun getAllFavorites(): Flow<List<FavoritesEntity>> {
+     fun getAllFavorites(): Flow<List<FavoritesEntity>> {
         return favoritesDao.getAllFavorites()
     }
 

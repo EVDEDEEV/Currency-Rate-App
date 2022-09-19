@@ -34,11 +34,15 @@ class CurrencyAdapter(
             addToFavorites: (CurrencyEntity) -> Unit,
         ) {
             val rateDoubleValue = currencyEntity.rate
-            binding.currencyName.text = currencyEntity.currencyName
-            binding.currencyRate.text = String.format("%.2f", rateDoubleValue)
-            binding.addToFavorites.setOnClickListener {
-                addToFavorites(currencyEntity)
+            with(binding) {
+                currencyName.text = currencyEntity.currencyName
+                currencyRate.text = String.format("%.2f", rateDoubleValue)
+                currencyDescription.text = currencyEntity.description
+                binding.addToFavorites.setOnClickListener {
+                    addToFavorites(currencyEntity)
+                }
             }
+
         }
     }
 

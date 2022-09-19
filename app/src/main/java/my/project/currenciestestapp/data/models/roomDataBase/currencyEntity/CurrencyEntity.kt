@@ -11,4 +11,6 @@ data class CurrencyEntity(
     var currencyName: String,
     @ColumnInfo(name = "rate")
     var rate: Double,
+    @ColumnInfo(name = "description")
+    var description: String,
 )

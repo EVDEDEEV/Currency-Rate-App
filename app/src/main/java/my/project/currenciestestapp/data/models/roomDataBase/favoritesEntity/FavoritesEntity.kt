@@ -11,4 +11,6 @@ data class FavoritesEntity(
     var favoritesCurrencyName: String,
     @ColumnInfo(name = "favorite_rate")
     var favoriteRate: Double,
+    @ColumnInfo(name = "description")
+    var favoriteDescription: String,
 )

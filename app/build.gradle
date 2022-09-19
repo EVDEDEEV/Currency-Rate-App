@@ -74,6 +74,7 @@ android {
         //Retrofit
         implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
         implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+        implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3'
 
         //Room
         implementation "androidx.room:room-runtime:$room_version"
