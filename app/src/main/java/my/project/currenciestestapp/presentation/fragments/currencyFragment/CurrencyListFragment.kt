@@ -9,14 +9,9 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import my.project.currenciestestapp.Constants.NAME_ASC_ARG
 import my.project.currenciestestapp.Constants.NAME_DESC_ARG
@@ -40,7 +35,6 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
     private var currencyAdapter = CurrencyAdapter { currencyEntity: CurrencyEntity ->
         addToFavorites(currencyEntity)
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,19 +65,19 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
             }
     }
 
-     fun checkInternetConnectionAndRefreshData() {
+    fun checkInternetConnectionAndRefreshData() {
         with(binding) {
             if (currencyViewModel.connectionError.value?.isNotEmpty() == true) {
                 setupDataLoading()
                 mainFragmentContainer.visibility = View.INVISIBLE
                 refreshConnectionButton.visibility = View.VISIBLE
                 checkInternetConnectionText.visibility = View.VISIBLE
-                    setupDataLoading()
+                setupDataLoading()
             } else {
                 setupDataLoading()
-                    amountTextInput.doAfterTextChanged {
-                        setupDataLoading()
-                    }
+                amountTextInput.doAfterTextChanged {
+                    setupDataLoading()
+                }
                 checkInternetConnectionText.visibility = View.INVISIBLE
                 mainFragmentContainer.visibility = View.VISIBLE
                 refreshConnectionButton.visibility = View.INVISIBLE
@@ -154,9 +148,9 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
         filterListByRateDescending()
     }
 
-    private fun filterListByNameAscending() {
-        setFragmentResultListener(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_ASC) { key, bundle ->
-            val result = bundle.getString(NAME_ASC_ARG)
+    private fun filtersBoilerplateCode(requestKey: String, filterParam: String) {
+        setFragmentResultListener(requestKey) { key, bundle ->
+            val result = bundle.getString(filterParam)
             val sortedCurrency = currencyViewModel.getFilteredList(result)
             lifecycleScope.launch(Dispatchers.IO) {
                 sortedCurrency.collect {
@@ -164,41 +158,24 @@ class CurrencyListFragment : Fragment(R.layout.fragment_currency_list) {
                 }
             }
         }
+    }
+
+    private fun filterListByNameAscending() {
+        filtersBoilerplateCode(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_ASC, NAME_ASC_ARG)
     }
 
     private fun filterListByNameDescending() {
-        setFragmentResultListener(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_DESC) { key, bundle ->
-            val result = bundle.getString(NAME_DESC_ARG)
-            val sortedCurrency = currencyViewModel.getFilteredList(result)
-            lifecycleScope.launch(Dispatchers.IO) {
-                sortedCurrency.collect {
-                    currencyAdapter.submitList(it)
-                }
-            }
-        }
+        filtersBoilerplateCode(REQUEST_KEY_FOR_CURRENCY_NAME_FILTER_DESC,
+            NAME_DESC_ARG)
     }
 
     private fun filterListByRateAscending() {
-        setFragmentResultListener(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_ASC) { key, bundle ->
-            val result = bundle.getString(RATE_ASC_ARG)
-            val sortedCurrency = currencyViewModel.getFilteredList(result)
-            lifecycleScope.launch(Dispatchers.IO) {
-                sortedCurrency.collect {
-                    currencyAdapter.submitList(it)
-                }
-            }
-        }
+        filtersBoilerplateCode(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_ASC,
+            RATE_ASC_ARG)
     }
 
     private fun filterListByRateDescending() {
-        setFragmentResultListener(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_DESC) { key, bundle ->
-            val result = bundle.getString(RATE_DESC_ARG)
-            val sortedCurrency = currencyViewModel.getFilteredList(result)
-            lifecycleScope.launch(Dispatchers.IO) {
-                sortedCurrency.collect {
-                    currencyAdapter.submitList(it)
-                }
-            }
-        }
+        filtersBoilerplateCode(REQUEST_KEY_FOR_CURRENCY_RATE_FILTER_DESC,
+            RATE_DESC_ARG)
     }
 }

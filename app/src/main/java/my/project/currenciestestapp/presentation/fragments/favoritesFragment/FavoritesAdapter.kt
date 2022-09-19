@@ -2,12 +2,15 @@ package my.project.currenciestestapp.presentation.fragments.favoritesFragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import my.project.currenciestestapp.Constants.RATES_VALUES_FORMAT
 import my.project.currenciestestapp.data.models.roomDataBase.favoritesEntity.FavoritesEntity
 import my.project.currenciestestapp.databinding.FavoritesItemBinding
+import my.project.currenciestestapp.databinding.FragmentFavoritesBinding
+import kotlin.coroutines.coroutineContext
 
 class FavoritesAdapter(private val deleteItemFromFavorites: (FavoritesEntity) -> Unit) :
     ListAdapter<FavoritesEntity, FavoritesAdapter.FavoritesViewHolder>(DIFF_CALLBACK) {

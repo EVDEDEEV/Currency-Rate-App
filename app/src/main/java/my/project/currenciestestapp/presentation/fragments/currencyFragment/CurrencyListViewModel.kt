@@ -50,7 +50,7 @@ class CurrencyListViewModel @Inject constructor(
     fun getRatesFromApi(base: String, amount: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                repository.getRatesFromApi(base, amount)
+                repository.getResponseFromApis(base, amount)
             } catch (ce: CancellationException) {
                 throw ce
             } catch (e: Exception) {

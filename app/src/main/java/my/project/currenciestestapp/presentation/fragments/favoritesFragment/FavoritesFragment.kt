@@ -2,6 +2,7 @@ package my.project.currenciestestapp.presentation.fragments.favoritesFragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -37,6 +38,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         }
     }
 
+
     private fun initRecyclerView() {
         binding.recyclerViewFavorites.apply {
 
@@ -56,6 +58,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     private fun deleteAllFavorites() {
         binding.clearFavoritesFAB.setOnClickListener {
+            Toast.makeText(this@FavoritesFragment.requireActivity(),
+                "All currencies removed from favorites ",
+                Toast.LENGTH_SHORT).show()
             favoritesViewModel.deleteAllFavoritesItems()
         }
     }

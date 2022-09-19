@@ -20,6 +20,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:gravity="center"
+            android:textStyle="bold"
             android:layout_margin="8dp"
             android:fontFamily="@font/aldrich"
             android:textSize="15sp"
@@ -49,7 +50,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="45dp"
-            android:background="#EDE7F6"
+            android:background="@color/light_orange"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
@@ -70,8 +71,8 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/addToFavorites"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
             android:layout_margin="5dp"
             android:backgroundTint="@color/white"
             android:padding="10dp"
